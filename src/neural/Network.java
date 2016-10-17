@@ -4,8 +4,8 @@ import java.util.Arrays;
 
 public class Network {
 
-	Layer[] layers = null;
-	int[] layerSizes = null;
+	private Layer[] layers = null;
+	private int[] layerSizes;
 	
 	public Network(int[] layerSizes) {
 		this.layerSizes = layerSizes;
@@ -33,10 +33,33 @@ public class Network {
 		
 		for (int i = 0; i < layers.length; i ++) {
 			for (int j = 0; j < layers[i].neurons.length; j++) {
-				System.out.print(Arrays.toString(layers[i].neurons[j].weights));
+				System.out.print(Arrays.toString(layers[i].getNeurons()[j].getWeights()));
 				System.out.print(" ");
 			}
 			System.out.println();
 		}
 	}
+	
+	public double[][][] getNetwork() {
+		double[][][] net = new double[layers.length][][];
+		
+		for (int i = 0; i < layers.length; i++) {
+			net[i] = layers[i].getLayer();
+		}
+		return net;
+	}
+	
+	public Network(double[][][] net) {
+		
+		layers = new Layer[net.length];
+		layerSizes = new int[net.length];
+		
+		for (int i = 0; i < net.length; i++) {
+			layers[i] = new Layer(net[i]);
+			layerSizes[i] = net[i].length;
+			
+		}
+	}
+	
+	
 }

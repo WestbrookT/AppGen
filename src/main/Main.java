@@ -10,18 +10,7 @@ public class Main {
 		
 		// THIS IS PSUEDO CODE FOR NOW
 		
-		Model model = new Model();
-		View view = new View();
 		
-		
-		while (true) {
-			
-			for (int i = 0; i < speed; i++) {
-				model.update();
-			}
-			
-			view.update(model);
-		}
 
 	}
 

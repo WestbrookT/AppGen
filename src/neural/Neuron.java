@@ -19,6 +19,10 @@ public class Neuron {
 		}
 	}
 	
+	public Neuron(double[] ds) {
+		weights = (double[])ds.clone();
+	}
+
 	public double out(double[] inputs) {
 		
 		
@@ -33,7 +37,11 @@ public class Neuron {
 	}
 	
 	public double[] getWeights() {
-		return weights;
+		return (double[])weights.clone();
 	}
+
+	
+
+	
 
 }

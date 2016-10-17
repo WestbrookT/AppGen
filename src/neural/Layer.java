@@ -4,11 +4,11 @@ public class Layer {
 
 	Neuron[] neurons = null;
 	int size;
-	int lastSize;
+	
 	public Layer(int lastCount, int size) {
 		neurons = new Neuron[size];
 		this.size = size;
-		lastSize = lastCount;
+		
 		
 		for (int i = 0; i < size; i++) {
 			neurons[i] = new Neuron(lastCount);
@@ -16,6 +16,15 @@ public class Layer {
 		
 	}
 	
+	public Layer(double[][] ds) {
+		neurons = new Neuron[ds.length];
+		
+		for (int i = 0; i < ds.length; i++) {
+			neurons[i] = new Neuron(ds[i]);
+		}
+		
+	}
+
 	public double[] out(double[] inputs) {
 		double[] outs = new double[size];
 		
@@ -25,13 +34,22 @@ public class Layer {
 		return outs;
 	}
 	
-	public double[][] getWeights() {
-		double[][] outs = new double[size][lastSize];
+	
+	/**
+	 * Gets a copy of the layer as a double[][]
+	 * @return Returns an array of double[] each of which contains a neurons set of weights.
+	 */
+	public double[][] getLayer() {
 		
-		for (int i = 0; i < size; i++) {
-			outs[i] = neurons[i].getWeights();
+		double[][] layer = new double[neurons.length][];
+		
+		for (int i = 0; i < neurons.length; i++) {
+			layer[i] = neurons[i].getWeights();
 		}
-		
-		return outs;
+		return layer;
+	}
+	
+	public Neuron[] getNeurons() {
+		return neurons;
 	}
 }
