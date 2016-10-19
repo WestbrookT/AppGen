@@ -11,4 +11,14 @@ public class WorldGrid {
 		return tiles[x][y].consume(r, g, b);
 	}
 
+	public void killCreature(int xPos, int yPos) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void move(int xOld, int yOld, int xPos, int yPos) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

@@ -11,6 +11,12 @@ public class Creature {
 	private int yPos;
 	private WorldGrid world;
 	
+	private void check() {
+		if (size <= 0) {
+			world.killCreature(xPos, yPos);
+		}
+	}
+	
 	private void eat(double val) {
 		int cost = (int)(size*.05)+1;
 		size -= cost;
@@ -21,10 +27,18 @@ public class Creature {
 	
 	
 	private void move(double x, double y) {
-		if (Math.abs(x) > .5)
+		int xOld = xPos;
+		int yOld = yPos;
+		if (Math.abs(x) > .5) {
 			xPos += Math.round(x);
-		if (Math.abs(y) > .5)
+			
+		}
+		if (Math.abs(y) > .5) {
 			yPos += Math.round(y);
+		}
+		if (xOld != xPos || yOld != yPos)
+			world.move(xOld, yOld, xPos, yPos);
+		
 	}
 	
 	public void act() {
