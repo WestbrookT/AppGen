@@ -20,7 +20,10 @@ public class Neuron {
 	}
 	
 	public Neuron(double[] ds) {
-		weights = (double[])ds.clone();
+		weights = new double[ds.length];
+		for (int i = 0; i < ds.length; i++)
+			weights[i] = ds[i];
+		wCount = weights.length;
 	}
 
 	public double out(double[] inputs) {
@@ -37,7 +40,10 @@ public class Neuron {
 	}
 	
 	public double[] getWeights() {
-		return (double[])weights.clone();
+		double[] out = new double[weights.length];
+		for (int i = 0; i < out.length; i++)
+			out[i] = weights[i];
+		return out;
 	}
 
 	
