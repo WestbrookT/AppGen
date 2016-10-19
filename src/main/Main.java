@@ -8,7 +8,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		// THIS IS PSUEDO CODE FOR NOW
+		// THIS IS not PSUEDO CODE FOR NOW
 		
 		
 
