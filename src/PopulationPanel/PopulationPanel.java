@@ -110,10 +110,6 @@ public class PopulationPanel extends JPanel {
         }
     }
 
-//    @Override
-//    public Dimension getPreferredSize() {
-//        return new Dimension(width, heigth);
-//    }
     private double getMinPop() {
         double minPop = Integer.MAX_VALUE;
         for (int population : pop) {
