@@ -17,12 +17,9 @@ public class PopulationPanel extends JPanel {
     private int pointWidth = 4;
     private int numberYDivisions = 10;
     private ArrayList<Integer> pop = new ArrayList <Integer> ();
-    private int [] population = {1,2,6,124,32,5645,856,190};
-    
-    
 
-    public PopulationPanel(ArrayList<Integer> temp) {
-        this.pop = temp;
+    public PopulationPanel(ArrayList<Integer> pop) {
+        this.pop = pop;
     }
 
     @Override
