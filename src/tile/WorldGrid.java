@@ -1,6 +1,7 @@
 package tile;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import neural.Creature;
 
@@ -70,10 +71,10 @@ public class WorldGrid {
 		
 	}
 
-	public int attack(int x, int y) {
+	public int attack(int x, int y, int size) {
 		int xTile = (int)(x/tileSize);
 		int yTile = (int)(y/tileSize);
-		return tiles[xTile][yTile].attack(x, y);
+		return tiles[xTile][yTile].attack(x, y, size);
 		
 		
 	}
@@ -92,6 +93,24 @@ public class WorldGrid {
 	
 	public Tile[][] getTiles() {
 		return tiles;
+	}
+
+	public void createCreature(Creature kid) {
+		Random r = new Random();
+		while (creatures[kid.getX()][kid.getY()] != null) {
+			int x = (r.nextInt() % 2) == 0 ? 1 : -1;
+			int y = (r.nextInt() % 2) == 0 ? 1 : -1;
+			kid.mvX(x);
+			kid.mvY(y);
+		}
+		
+		creatures[kid.getX()][kid.getY()] = kid;
+		int xTile = (int)(kid.getX()/tileSize);
+		int yTile = (int)(kid.getY()/tileSize);
+		
+		tiles[xTile][yTile].addCreature(kid);
+			
+		
 	}
 
 }
