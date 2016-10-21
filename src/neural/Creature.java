@@ -42,9 +42,12 @@ public class Creature {
 		}
 	}
 	
-	private void attack() {
-		int cost =  (int)(size*.06)+1;
-		size -= cost;
+	private void attack(double val) {
+		if (val > .5) {
+			int cost =  (int)(size*.06)+1;
+			size -= cost;
+			world.attack(xPos, yPos);
+		}
 		
 	}
 	
@@ -108,6 +111,11 @@ public class Creature {
 	
 	public int getY() {
 		return yPos;
+	}
+	public int damage(int size) {
+		int dam = (int)(size*.05)+1;
+		size -= dam;
+		return dam;
 	}
 	
 	

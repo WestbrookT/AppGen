@@ -140,7 +140,7 @@ public class Tile {
 		
 	}
 
-	public int attack(int x, int y) {
+	public int attack(int x, int y, int size) {
 		
 		Creature closest = null;
 		double cDis = 20;
@@ -153,12 +153,15 @@ public class Tile {
 			if (dis < cDis) {
 				if (dis != 0) {
 					cDis = dis;
+					closest = c;
 				}
 			}
 		}
 		
+		int out = closest.damage(size);
+		
 		// TODO Auto-generated method stub
-		return 0;
+		return out;
 	}
 }
 
