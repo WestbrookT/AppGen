@@ -9,8 +9,24 @@ public class Creature {
 	private int r, g, b;
 	private int xPos;
 	private int yPos;
-	private WorldGrid world;
 	
+	private WorldGrid world;
+	private double angle;
+	private static final double eyeMax = 5.0;
+	
+	public Creature(int x, int y, WorldGrid grid) {
+		size = 10;
+		//inputs: rgbEye, mass/10, enemy(0, 1), rgbSelf 
+		// eyedis1 eyeDir movedis1 movedir2 attack1 eat1 reproduce
+		int[] layers = {8, 10, 8};
+		brain = new Network(layers);
+		r = 150;
+		g = 150;
+		b = 150;
+		xPos = x;
+		yPos = y;
+		world = grid;
+	}
 	private void check() {
 		if (size <= 0) {
 			world.killCreature(xPos, yPos);
@@ -41,7 +57,32 @@ public class Creature {
 		
 	}
 	
+	private double sig(double num) {
+		return 1/(1+Math.exp(-num));
+	}
+	
+	/**
+	 * 
+	 * @return an array with 4 values, rgb and enemyPresent
+	 */
+	private int[] look(double eyeDis) {
+		
+		int xd = (int)(eyeDis*Math.cos(2*Math.PI*angle));
+		int yd = (int)(eyeDis*Math.sin(2*Math.PI*angle));
+		return null;
+		
+		
+	}
+	
 	public void act() {
+		/*
+		 * Inputs are the rgb values (sigmoided) of the eye, the size of the 
+		 * creature through sigmoid, whether it sees and enemy, rgb values
+		 * of its location.
+		 */
+		double[] inputs = new double[8];
+		
+		
 		
 	}
 	
@@ -53,19 +94,15 @@ public class Creature {
 		return null;
 	}
 	
-	public Creature(int x, int y, WorldGrid grid) {
-		size = 10;
-		//inputs: rgbEye, mass/10, enemy(0, 1), rgbSelf 
-		// eyedis1 eyeDir movedis1 movedir2 attack1 eat1 reproduce
-		int[] layers = {8, 10, 8};
-		brain = new Network(layers);
-		r = 150;
-		g = 150;
-		b = 150;
-		xPos = x;
-		yPos = y;
-		world = grid;
+	public int getX() {
+		return xPos;
 	}
+	
+	public int getY() {
+		return yPos;
+	}
+	
+	
 }
 
 

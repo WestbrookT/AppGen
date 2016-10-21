@@ -1,5 +1,9 @@
 package tile;
 
+import java.util.ArrayList;
+
+import neural.Creature;
+
 public class Tile {
 	
 	private int r;
@@ -10,6 +14,7 @@ public class Tile {
 	private int maxB;
 	private int lastIter = 0;
 	private static int iter = 0;
+	private ArrayList<Creature> creatures;
 	
 	public int getR() {
 		update();
@@ -103,4 +108,29 @@ public class Tile {
 		}
 		return out;
 	}
+	
+	public ArrayList<Creature> getCreatures() {
+		return creatures;
+	}
+	
+	public void removeCreature(Creature c) {
+		for (int i = 0; i < creatures.size(); i++) {
+			if (creatures.get(i) == c) {
+				creatures.remove(i);
+				return;
+				
+			}
+		}
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
