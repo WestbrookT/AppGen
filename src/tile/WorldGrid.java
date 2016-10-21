@@ -70,4 +70,28 @@ public class WorldGrid {
 		
 	}
 
+	public int attack(int x, int y) {
+		int xTile = (int)(x/tileSize);
+		int yTile = (int)(y/tileSize);
+		return tiles[xTile][yTile].attack(x, y);
+		
+		
+	}
+	
+	public ArrayList<Creature> getCreatures() {
+		
+		ArrayList<Creature> out = new ArrayList<Creature>();
+		for (int i = 0; i < creatures.length; i++)
+			for (int j = 0; j < creatures[i].length; j++)
+				if (creatures[i][j] != null)
+					out.add(creatures[i][j]);
+		return out;
+		
+		
+	}
+	
+	public Tile[][] getTiles() {
+		return tiles;
+	}
+
 }

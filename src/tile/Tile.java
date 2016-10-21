@@ -139,6 +139,27 @@ public class Tile {
 		return out;
 		
 	}
+
+	public int attack(int x, int y) {
+		
+		Creature closest = null;
+		double cDis = 20;
+		
+		for (Creature c : creatures) {
+			
+			double dis = Math.pow((x-c.getX()), 2) + Math.pow((y-c.getY()), 2);
+			dis = Math.sqrt(dis);
+			
+			if (dis < cDis) {
+				if (dis != 0) {
+					cDis = dis;
+				}
+			}
+		}
+		
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }
 
 

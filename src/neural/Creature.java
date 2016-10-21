@@ -34,10 +34,18 @@ public class Creature {
 	}
 	
 	private void eat(double val) {
-		int cost = (int)(size*.05)+1;
-		size -= cost;
-		if (val > .5)
+		
+		if (val > .5) {
+			int cost = (int)(size*.05)+1;
+			size -= cost;
 			size += world.consume(xPos, yPos, r, g, b);
+		}
+	}
+	
+	private void attack() {
+		int cost =  (int)(size*.06)+1;
+		size -= cost;
+		
 	}
 	
 	
