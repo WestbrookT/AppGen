@@ -123,7 +123,20 @@ public class Tile {
 		}
 	}
 	
+	public void addCreature(Creature c) {
+		creatures.add(c);
+	}
+	
 	public int[] look(int x, int y) {
+		
+		int[] out = {r, g, b, 0};
+		
+		for (Creature c : creatures) {
+			if (c.getX() == x && c.getY() == y)
+				out[3] = 1;
+		}
+		
+		return out;
 		
 	}
 }

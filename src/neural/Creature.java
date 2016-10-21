@@ -69,9 +69,9 @@ public class Creature {
 		
 		int xd = (int)(eyeDis*Math.cos(2*Math.PI*angle));
 		int yd = (int)(eyeDis*Math.sin(2*Math.PI*angle));
-		return null;
 		
-		
+		return world.look(xPos+xd, yPos+yd);
+				
 	}
 	
 	public void act() {
@@ -86,8 +86,8 @@ public class Creature {
 		
 	}
 	
-	public double[][] run() {
-		return null;
+	public double[][][] weights() {
+		return brain.getNetwork();
 	}
 	
 	private Creature reproduce() {
