@@ -20,6 +20,7 @@ public class Main extends JFrame{
 	private JButton PauseButton;
 	
 	private static int speed = 1;
+	private static double power = 0;
 	public Main() {
 		super("Evolutionary Neural Control Simulator");
 		
@@ -36,11 +37,14 @@ public class Main extends JFrame{
 		panelNorth.add(SaveButton);
 		PauseButton = new JButton("Pause");
 		panelNorth.add(PauseButton);
-		LoadButton.addActionListener(new LoadState());
-		SpeedButton.addActionListener(new SpeedState());
-		SaveButton.addActionListener(new SaveState());
-		PauseButton.addActionListener(new PauseState());
-		
+		LoadState loader = new LoadState(LoadButton);
+		LoadButton.addActionListener(loader);
+		SpeedState speeder = new SpeedState(SpeedButton, speed, power);
+		SpeedButton.addActionListener(speeder);
+		SaveState saver = new SaveState(SaveButton);
+		SaveButton.addActionListener(saver);
+		PauseState pauser = new PauseState(PauseButton, speed, power);
+		PauseButton.addActionListener(pauser);
 	}
 	
 	public static void main(String[] args) {
@@ -51,7 +55,6 @@ public class Main extends JFrame{
 		window.setSize(500, 500);
 		window.setVisible(true);
 		
-
 	}
 
 }
