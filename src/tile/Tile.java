@@ -122,6 +122,10 @@ public class Tile {
 			}
 		}
 	}
+	
+	public int[] look(int x, int y) {
+		
+	}
 }
 
 
