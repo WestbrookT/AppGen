@@ -61,19 +61,20 @@ public class Creature {
 	
 	private void eat(double val) {
 		check();
-		
+		int cost = (int)(size*.05)+1;
+		size -= cost;
 		if (val > .5) {
-			int cost = (int)(size*.05)+1;
-			size -= cost;
+			
 			size += world.consume(xPos, yPos, r, g, b);
 		}
 	}
 	
 	private void attack(double val) {
 		check();
+		int cost =  (int)(size*.06)+1;
+		size -= cost;
 		if (val > .5) {
-			int cost =  (int)(size*.06)+1;
-			size -= cost;
+			
 			size += world.attack(xPos, yPos, size);
 		}
 		
@@ -203,10 +204,12 @@ public class Creature {
 		/*
 		 * This is the part where the network makes decisions.
 		 */
+		
 		move(decisions[0], decisions[1]);
 		angle = decisions[2];
 		attack(decisions[3]);
 		reproduce(decisions[4]);
+		
 		
 		//Change the color of the creature to match its decisions.
 		

@@ -61,7 +61,9 @@ public class WorldGrid {
 		// TODO Auto-generated method stub
 		int x = (int)(xPos/10);
 		int y = (int)(yPos/10);
+		
 		return tiles[x][y].consume(r, g, b);
+		
 	}
 
 	public void killCreature(int xPos, int yPos) {

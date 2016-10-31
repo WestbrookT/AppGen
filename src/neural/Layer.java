@@ -7,7 +7,7 @@ public class Layer {
 	
 	public Layer(int lastCount, int s) {
 		if (s < 1)
-			System.out.println("here" + s);
+			System.exit(-5);
 		neurons = new Neuron[s];
 		size = s;
 		if (size < 1)
@@ -33,7 +33,7 @@ public class Layer {
 		double[] outs = new double[neurons.length];
 		
 		
-		for (int i = 0; i < size; i++) {
+		for (int i = 0; i < neurons.length; i++) {
 			outs[i] = neurons[i].out(inputs);
 		}
 		return outs;
