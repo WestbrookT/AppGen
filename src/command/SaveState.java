@@ -10,11 +10,10 @@ import java.util.Properties;
 
 import javax.swing.AbstractButton;
 
-public class SaveState implements ActionListener {
+public class SaveState implements ActionListener, java.io.Serializable {
 	
 	AbstractButton button;
 	File file = new File("saved data.prop");
-	JSONObject save = new JSONObject();
 	
 	public SaveState(AbstractButton button) {
 		this.button = button;
@@ -23,21 +22,21 @@ public class SaveState implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		save.setProperty(ArrayList<Creature>, creature);
+		//save.setProperty(ArrayList<Creature>, creature);
 		
-		BufferedWriter pen;
-		try {
-			pen = new BufferedWriter(new FileWriter(file));
-		} catch (IOException e1) {
+//		BufferedWriter pen;
+//		try {
+//			pen = new BufferedWriter(new FileWriter(file));
+//		} catch (IOException e1) {
 			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		try {
-			save.store(pen, "properties of creatures");
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+//			e1.printStackTrace();
+//		}
+//		try {
+//			save.store(pen, "properties of creatures");
+//		} catch (IOException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
 		
 	}
 

@@ -31,10 +31,10 @@ public class Main extends JFrame{
 		panelNorth.setBackground(Color.YELLOW);
 		LoadButton = new JButton("Load");
 		panelNorth.add(LoadButton);
-		SpeedButton = new JButton("Speed: x" + speed);
-		panelNorth.add(SpeedButton);
 		SaveButton = new JButton("Save");
 		panelNorth.add(SaveButton);
+		SpeedButton = new JButton("Speed: x" + speed);
+		panelNorth.add(SpeedButton);
 		PauseButton = new JButton("Pause");
 		panelNorth.add(PauseButton);
 		LoadState loader = new LoadState(LoadButton);
