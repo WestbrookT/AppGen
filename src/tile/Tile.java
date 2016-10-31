@@ -16,6 +16,19 @@ public class Tile {
 	private static int iter = 0;
 	private ArrayList<Creature> creatures;
 	
+	public Tile(int R, int G, int B) {
+		r = R;
+		maxR = r;
+		
+		g = G;
+		maxG = g;
+		
+		b = B;
+		maxB = b;
+		
+		creatures = new ArrayList<Creature>();
+	}
+	
 	public int getR() {
 		update();
 		return r;
@@ -75,6 +88,8 @@ public class Tile {
 		update();
 		this.maxB = maxB;
 	}
+	
+	
 	
 	private void update() {
 		for (int i = lastIter; i < iter; i++)
@@ -157,6 +172,8 @@ public class Tile {
 				}
 			}
 		}
+		if (closest == null)
+			return 0;
 		
 		int out = closest.damage(size);
 		

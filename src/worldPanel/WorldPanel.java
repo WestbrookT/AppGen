@@ -46,7 +46,7 @@ public class WorldPanel extends JPanel {
     }
 
     private static void createAndShowGui() {
-        WorldGrid wg = new WorldGrid(10,10);
+        WorldGrid wg = new WorldGrid(10,10, 10, 10);
         //wg.consume(5,5,128,128,128);
         WorldPanel mainPanel = new WorldPanel(wg);
         mainPanel.setPreferredSize(new Dimension(800, 600));

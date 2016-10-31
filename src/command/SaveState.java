@@ -14,6 +14,10 @@ public class SaveState implements ActionListener, java.io.Serializable {
 	
 	AbstractButton button;
 	File file = new File("saved data.prop");
+<<<<<<< HEAD
+=======
+	//JSONObject save = new JSONObject();
+>>>>>>> 3344c6376aedf2106014c5330127dad2b8ae002a
 	
 	public SaveState(AbstractButton button) {
 		this.button = button;
@@ -29,6 +33,7 @@ public class SaveState implements ActionListener, java.io.Serializable {
 //			pen = new BufferedWriter(new FileWriter(file));
 //		} catch (IOException e1) {
 			// TODO Auto-generated catch block
+<<<<<<< HEAD
 //			e1.printStackTrace();
 //		}
 //		try {
@@ -37,6 +42,16 @@ public class SaveState implements ActionListener, java.io.Serializable {
 //			// TODO Auto-generated catch block
 //			e1.printStackTrace();
 //		}
+=======
+			e1.printStackTrace();
+		}
+		try {
+			//save.store(pen, "properties of creatures");
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+>>>>>>> 3344c6376aedf2106014c5330127dad2b8ae002a
 		
 	}
 

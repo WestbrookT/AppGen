@@ -3,11 +3,15 @@ package neural;
 public class Layer {
 
 	Neuron[] neurons = null;
-	int size;
+	private int size;
 	
-	public Layer(int lastCount, int size) {
-		neurons = new Neuron[size];
-		this.size = size;
+	public Layer(int lastCount, int s) {
+		if (s < 1)
+			System.out.println("here" + s);
+		neurons = new Neuron[s];
+		size = s;
+		if (size < 1)
+			System.out.println("ERROR" + s);
 		
 		
 		for (int i = 0; i < size; i++) {
@@ -26,7 +30,8 @@ public class Layer {
 	}
 
 	public double[] out(double[] inputs) {
-		double[] outs = new double[size];
+		double[] outs = new double[neurons.length];
+		
 		
 		for (int i = 0; i < size; i++) {
 			outs[i] = neurons[i].out(inputs);
