@@ -1,5 +1,7 @@
 package neural;
 
+import java.util.ArrayList;
+
 import tile.Tile;
 import tile.WorldGrid;
 
@@ -27,6 +29,10 @@ public class Model {
 	
 	public Creature getNearestCreature(int x, int y) {
 		return null;
+	}
+	
+	public ArrayList<Creature> getCreatures() {
+		return world.getCreatures();
 	}
 	
 	public void load(String filename) {
