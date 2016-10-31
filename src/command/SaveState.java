@@ -14,7 +14,7 @@ public class SaveState implements ActionListener {
 	
 	AbstractButton button;
 	File file = new File("saved data.prop");
-	JSONObject save = new JSONObject();
+	//JSONObject save = new JSONObject();
 	
 	public SaveState(AbstractButton button) {
 		this.button = button;
@@ -23,7 +23,7 @@ public class SaveState implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		save.setProperty(ArrayList<Creature>, creature);
+		//save.setProperty(ArrayList<Creature>, creature);
 		
 		BufferedWriter pen;
 		try {
@@ -33,8 +33,8 @@ public class SaveState implements ActionListener {
 			e1.printStackTrace();
 		}
 		try {
-			save.store(pen, "properties of creatures");
-		} catch (IOException e1) {
+			//save.store(pen, "properties of creatures");
+		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}

@@ -20,13 +20,25 @@ public class Network {
 	}
 	
 	public double[] out(double[] inputs) {
+		//System.out.println("--");
+		//System.out.println(Arrays.toString(inputs));
 		
-		double[] temp = inputs;
+		double[] temp = new double[inputs.length];
+		for (int i = 0; i < temp.length; i++)
+			temp[i] = inputs[i];
 		
+		//System.out.println("Before" + Arrays.toString(temp));
 		for (int i = 1; i < layers.length; i++) {
 			temp = layers[i].out(temp);
+			//System.out.print("here " + i);
+			//System.out.println(Arrays.toString(temp));
+			
 		}
-		
+		if (temp.length < 1) {
+			//System.out.println(Arrays.toString(inputs));
+			System.out.println(Arrays.toString(temp));
+			System.out.println("---");
+		}
 		return temp;
 	}
 	public void print() {

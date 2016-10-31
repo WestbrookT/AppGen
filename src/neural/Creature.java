@@ -1,5 +1,6 @@
 package neural;
 
+import java.util.Arrays;
 import java.util.Random;
 
 import sun.nio.ch.Net;
@@ -17,15 +18,16 @@ public class Creature {
 	private double angle;
 	private double eyeDis;
 	private final double eyeMax = 5.0;
+	private double memory = 0.0;
 	
 	private double mutationRate = .5;
 	private double mutationSize = .1;
 	
 	public Creature(int x, int y, int size, WorldGrid grid) {
-		size = 10;
+		size = 100;
 		//inputs: rgbEye, mass/10, enemy(0, 1), rgbSelf 
 		// eyedis1 eyeDir movedis1 movedir2 attack1 eat1 reproduce
-		int[] layers = {8, 10, 8};
+		int[] layers = {9, 3, 9};
 		brain = new Network(layers);
 		r = 150;
 		g = 150;
@@ -33,10 +35,11 @@ public class Creature {
 		xPos = x;
 		yPos = y;
 		world = grid;
+		this.size = size;
 	}
 	
 	public Creature(int x, int y, int size, WorldGrid grid, double[][][] net) {
-		size = 10;
+		size = 100;
 		//inputs: rgbEye, mass/10, enemy(0, 1), rgbSelf 
 		// eyedis1 eyeDir movedis1 movedir2 attack1 eat1 reproduce
 		
@@ -52,10 +55,12 @@ public class Creature {
 	private void check() {
 		if (size <= 0) {
 			world.killCreature(xPos, yPos);
+			System.out.println(size);
 		}
 	}
 	
 	private void eat(double val) {
+		check();
 		
 		if (val > .5) {
 			int cost = (int)(size*.05)+1;
@@ -65,6 +70,7 @@ public class Creature {
 	}
 	
 	private void attack(double val) {
+		check();
 		if (val > .5) {
 			int cost =  (int)(size*.06)+1;
 			size -= cost;
@@ -95,6 +101,7 @@ public class Creature {
 	}
 	
 	private void reproduce(double val) {
+		check();
 		if (val > .7) {
 			int cost = (int)(size*.1)+5;
 			size -= cost;
@@ -108,17 +115,23 @@ public class Creature {
 	
 	
 	private void move(double x, double y) {
+		check();
+		
+		x = x * 2 - 1;
+		y = y * 2 - 1;
+		
 		int xOld = xPos;
 		int yOld = yPos;
 		if (Math.abs(x) > .5) {
-			xPos += Math.round(x);
+			xPos += (int)Math.round(x);
 			
 		}
 		if (Math.abs(y) > .5) {
-			yPos += Math.round(y);
+			yPos += (int)Math.round(y);
 		}
-		if (xOld != xPos || yOld != yPos)
-			world.move(xOld, yOld, xPos, yPos);
+		int[] temp = world.move(xOld, yOld, xPos, yPos);
+		xPos = temp[0];
+		yPos = temp[1];
 		
 	}
 	
@@ -152,21 +165,58 @@ public class Creature {
 		 * creature through sigmoid, whether it sees and enemy, rgb values
 		 * of its location.
 		 */
-		double[] inputs = new double[8];
+		
+		// Get all the inputs set up.
+		size -= 1;
+		
+		double[] inputs = new double[9];
 		int[] rgbe = look(true);
 		for (int i = 0; i < rgbe.length-1; i++) {
 			inputs[i] = rgbe[i]/255.0;
 		}
 		inputs[3] = rgbe[3];
 		
-		inputs[4] = sig(size/10.0);
+		inputs[4] = sig(size);
 		
 		
 		rgbe = look(false);
 		for (int i = 0; i < rgbe.length-1; i++) {
 			inputs[i+5] = rgbe[i]/255.0;
 		}
-		// WORK HERE NEXT TIME FINISH THINKING
+		
+		inputs[8] = memory;
+		
+		double[] decisions = brain.out(inputs);
+		if (decisions.length < 1) {
+			
+			for (int i = 0; i < 9; i++)
+				System.out.print(inputs[i] + " ");
+			System.out.println();
+			System.out.println(Arrays.toString(brain.out(inputs)));
+			
+			System.out.println(decisions.length);
+			brain.print();
+			//while (true);
+			System.exit(1);
+		}
+		
+		/*
+		 * This is the part where the network makes decisions.
+		 */
+		move(decisions[0], decisions[1]);
+		angle = decisions[2];
+		attack(decisions[3]);
+		reproduce(decisions[4]);
+		
+		//Change the color of the creature to match its decisions.
+		
+		r = (int)(255*decisions[5]);
+		g = (int)(255*decisions[6]);
+		b = (int)(255*decisions[7]);
+		
+		// Update the memory variable
+		memory = decisions[8];
+		
 		
 		
 		
