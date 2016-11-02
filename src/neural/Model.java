@@ -42,7 +42,7 @@ public class Model {
 	public static void main(String[] args) {
 		
 		
-		world = new WorldGrid(3, 7, 3, 1);
+		world = new WorldGrid(10, 20, 2, 10);
 		
 		
 		Creature[][] c = world.getArrayCreatures();
@@ -63,13 +63,13 @@ public class Model {
 		int xs = world.getXTiles();
 		int ys = world.getYTiles();
 		
-		for (int x = 0; x < 100000; x++) {
+		for (int x = 0; x < 1; x++) {
 			world.advance();
 			if (x% 10 == 0)
 				System.out.println(x);
 		}
 		
-		for (int x = 0; x < 100; x++) {
+		for (int x = 0; x < 1000; x++) {
 			world.advance();
 			
 			
@@ -78,11 +78,18 @@ public class Model {
 				
 				for (int j = 0; j < ys*ts; j++)
 					if (c[i][j] != null)
-						System.out.print(" X");
+						System.out.print(" " + c[i][j].getR()%9);
 					else
 						System.out.print(" .");
 				System.out.println();
 			}
+			System.out.println(x);
+			for (int i = 0; i < 100000; i++)
+				for (int j = 0; j < 13000; j++)
+					for (int k = 0; k < 1; k++)
+					{
+						int b = i + j;
+					}
 			
 		}
 		

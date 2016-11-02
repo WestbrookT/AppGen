@@ -12,6 +12,7 @@ public class WorldGrid {
 	private int tileSize;
 	private ArrayList<Creature> cList;
 	private int cCount;
+	private int cStartSize = 50;
 	
 	private int xTiles;
 	private int yTiles;
@@ -41,7 +42,7 @@ public class WorldGrid {
 				x = r.nextInt(xTileCount*tileSize);
 				y = r.nextInt(yTileCount*tileSize);
 			} while (creatures[x][y] != null);
-			creatures[x][y] = new Creature(x, y, 50, this);
+			creatures[x][y] = new Creature(x, y, cStartSize, this);
 			cList.add(creatures[x][y]);
 			
 			int tX = (int)(x/tileSize);
@@ -106,11 +107,13 @@ public class WorldGrid {
 			boolean xChg = xOldTile != xNewTile;
 			boolean yChg = yOldTile != yNewTile;
 			if (xChg || yChg) {
+				System.out.println("test");
 				
 				tiles[xOldTile][yOldTile].removeCreature(c);
 				tiles[xNewTile][yNewTile].addCreature(c);
 			}
 			creatures[xPos][yPos] = creatures[xOld][yOld];
+			creatures[xOld][yOld] = null;
 			int[] temp = new int[2];
 			temp[0] = xPos;
 			temp[1] = yPos;

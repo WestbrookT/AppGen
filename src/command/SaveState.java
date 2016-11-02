@@ -33,7 +33,7 @@ public class SaveState implements ActionListener, java.io.Serializable {
 			FileOutputStream fout = new FileOutputStream("SavedData.ser");
 			ObjectOutputStream out = new ObjectOutputStream(fout);
 			
-		}
+		} catch (Exception ex) {}
 	}
 
 }

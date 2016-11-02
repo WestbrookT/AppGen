@@ -118,8 +118,7 @@ public class Creature {
 	private void move(double x, double y) {
 		check();
 		
-		x = x * 2 - 1;
-		y = y * 2 - 1;
+		
 		
 		int xOld = xPos;
 		int yOld = yPos;
@@ -213,9 +212,9 @@ public class Creature {
 		
 		//Change the color of the creature to match its decisions.
 		
-		r = (int)(255*decisions[5]);
-		g = (int)(255*decisions[6]);
-		b = (int)(255*decisions[7]);
+		r = (int)(255*(2*(1+decisions[5])));
+		g = (int)(255*(2*(1+decisions[6])));
+		b = (int)(255*(2*(1+decisions[7])));
 		
 		// Update the memory variable
 		memory = decisions[8];
@@ -250,6 +249,11 @@ public class Creature {
 		int dam = (int)(s*.1)+1;
 		size -= dam;
 		return dam;
+	}
+
+	public int getR() {
+		// TODO Auto-generated method stub
+		return r;
 	}
 	
 	
