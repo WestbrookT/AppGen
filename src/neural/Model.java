@@ -63,9 +63,9 @@ public class Model {
 		int xs = world.getXTiles();
 		int ys = world.getYTiles();
 		
-		for (int x = 0; x < 1; x++) {
+		for (int x = 0; x < 1000000; x++) {
 			world.advance();
-			if (x% 10 == 0)
+			if (x% 1000 == 0)
 				System.out.println(x);
 		}
 		
@@ -78,14 +78,14 @@ public class Model {
 				
 				for (int j = 0; j < ys*ts; j++)
 					if (c[i][j] != null)
-						System.out.print(" " + c[i][j].getR()%9);
+						System.out.print(" " + (int)(c[i][j].getR()/255.0*10));
 					else
 						System.out.print(" .");
 				System.out.println();
 			}
 			System.out.println(x);
 			for (int i = 0; i < 100000; i++)
-				for (int j = 0; j < 13000; j++)
+				for (int j = 0; j < 20000; j++)
 					for (int k = 0; k < 1; k++)
 					{
 						int b = i + j;

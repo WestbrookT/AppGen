@@ -27,7 +27,7 @@ public class Creature {
 		size = 100;
 		//inputs: rgbEye, mass/10, enemy(0, 1), rgbSelf 
 		// eyedis1 eyeDir movedis1 movedir2 attack1 eat1 reproduce
-		int[] layers = {9, 3, 9};
+		int[] layers = {9, 20, 10};
 		brain = new Network(layers);
 		r = 150;
 		g = 150;
@@ -55,7 +55,7 @@ public class Creature {
 	private void check() {
 		if (size <= 0) {
 			world.killCreature(xPos, yPos);
-			System.out.println(size);
+			//System.out.println(size);
 		}
 	}
 	
@@ -104,6 +104,7 @@ public class Creature {
 	private void reproduce(double val) {
 		check();
 		if (val > .7) {
+			//System.out.println("Kid made.");
 			int cost = (int)(size*.1)+5;
 			size -= cost;
 			
@@ -208,16 +209,18 @@ public class Creature {
 		angle = decisions[2];
 		attack(decisions[3]);
 		reproduce(decisions[4]);
+		eat(decisions[9]);
 		
 		
 		//Change the color of the creature to match its decisions.
 		
-		r = (int)(255*(2*(1+decisions[5])));
-		g = (int)(255*(2*(1+decisions[6])));
-		b = (int)(255*(2*(1+decisions[7])));
+		r = (int)(255*((1+decisions[5])/2));
+		g = (int)(255*((1+decisions[6])/2));
+		b = (int)(255*((1+decisions[7])/2));
 		
 		// Update the memory variable
 		memory = decisions[8];
+		
 		
 		
 		
@@ -253,6 +256,7 @@ public class Creature {
 
 	public int getR() {
 		// TODO Auto-generated method stub
+		//System.out.println(r);
 		return r;
 	}
 	

@@ -76,7 +76,7 @@ public class WorldGrid {
 		
 		tiles[xTile][yTile].removeCreature(c);
 		cList.remove(c);
-		System.out.println("Killed.");
+		//System.out.println("Killed.");
 		
 	}
 
@@ -107,7 +107,7 @@ public class WorldGrid {
 			boolean xChg = xOldTile != xNewTile;
 			boolean yChg = yOldTile != yNewTile;
 			if (xChg || yChg) {
-				System.out.println("test");
+				//System.out.println("test");
 				
 				tiles[xOldTile][yOldTile].removeCreature(c);
 				tiles[xNewTile][yNewTile].addCreature(c);
@@ -216,7 +216,7 @@ public class WorldGrid {
 			int y = r.nextInt(yTiles*tileSize);
 			Creature kid = new Creature(x, y, 100, this);
 			createCreature(kid);
-			System.out.println(cCount);
+			//System.out.println(cCount);
 		}
 		
 		
