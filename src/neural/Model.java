@@ -92,9 +92,7 @@ public class Model {
 					}
 	
 			
-		}
-		
-		
+		}		
 	}
 
 	
