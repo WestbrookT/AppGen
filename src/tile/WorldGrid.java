@@ -239,5 +239,10 @@ public class WorldGrid {
 		
 		return tileSize;
 	}
+
+	public void load(ArrayList<Creature> loaded) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }
