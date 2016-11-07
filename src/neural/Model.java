@@ -1,5 +1,11 @@
 package neural;
 
+import java.io.EOFException;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 import tile.Tile;
@@ -20,7 +26,19 @@ public class Model {
 	}
 	
 	public void save(String filename) {
+		try {
+		FileOutputStream fOut = new FileOutputStream(filename);
+		ObjectOutputStream out = new ObjectOutputStream(fOut);
 		
+		ArrayList<Creature> temp = getCreatures();
+		for (Creature x: temp) {
+			out.writeObject(filename);
+			out.close();
+			fOut.close();
+		}
+		} catch(IOException i) {
+			i.printStackTrace();
+		}
 	}
 	
 	public void advance() {
@@ -36,6 +54,28 @@ public class Model {
 	}
 	
 	public void load(String filename) {
+		ArrayList<Creature> loaded = new ArrayList<Creature>();
+		
+		try {
+			FileInputStream fIn = new FileInputStream(filename);
+			ObjectInputStream in = new ObjectInputStream(fIn);
+			while (true) {
+				Creature x = (Creature) in.readObject();
+				loaded.add(x);
+			}
+		} catch (EOFException z) {
+			System.out.println("end of file");
+		
+		} catch (IOException j) {
+			j.printStackTrace();
+			return;
+		} catch (ClassNotFoundException y) {
+			System.out.println("class not found");
+			y.printStackTrace();
+			return;
+		} 
+		
+		world.load(loaded);
 		
 	}
 	
