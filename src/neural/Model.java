@@ -27,15 +27,11 @@ public class Model {
 	
 	public void save(String filename) {
 		try {
-		FileOutputStream fOut = new FileOutputStream(filename);
-		ObjectOutputStream out = new ObjectOutputStream(fOut);
-		
-		ArrayList<Creature> temp = getCreatures();
-		for (Creature x: temp) {
-			out.writeObject(filename);
-			out.close();
-			fOut.close();
-		}
+			FileOutputStream wOut = new FileOutputStream(filename);
+			ObjectOutputStream worldOut = new ObjectOutputStream(wOut);
+			worldOut.writeObject(world);
+			worldOut.close();
+			wOut.close();
 		} catch(IOException i) {
 			i.printStackTrace();
 		}
@@ -54,18 +50,13 @@ public class Model {
 	}
 	
 	public void load(String filename) {
-		ArrayList<Creature> loaded = new ArrayList<Creature>();
-		
+		WorldGrid loaded = null;
 		try {
-			FileInputStream fIn = new FileInputStream(filename);
-			ObjectInputStream in = new ObjectInputStream(fIn);
-			while (true) {
-				Creature x = (Creature) in.readObject();
-				loaded.add(x);
-			}
+			FileInputStream wIn = new FileInputStream(filename);
+			ObjectInputStream in = new ObjectInputStream(wIn);
+			loaded = (WorldGrid) in.readObject();
 		} catch (EOFException z) {
 			System.out.println("end of file");
-		
 		} catch (IOException j) {
 			j.printStackTrace();
 			return;
@@ -74,9 +65,7 @@ public class Model {
 			y.printStackTrace();
 			return;
 		} 
-		
-		world.load(loaded);
-		
+		world = loaded;
 	}
 	
 	public static void main(String[] args) {
