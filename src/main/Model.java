@@ -1,4 +1,4 @@
-package neural;
+package main;
 
 import java.io.EOFException;
 import java.io.FileInputStream;
@@ -8,6 +8,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
+import neural.Creature;
 import tile.Tile;
 import tile.WorldGrid;
 
