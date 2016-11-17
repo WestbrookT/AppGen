@@ -1,4 +1,4 @@
-package neural;
+package Model;
 
 public class Layer {
 

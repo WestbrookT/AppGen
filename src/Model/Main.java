@@ -1,16 +1,15 @@
-package main;
+package Model;
 
 import java.awt.*;
 
 import javax.swing.*;
 import javax.swing.text.View;
 
+import View.WorldPanel;
 import command.LoadState;
 import command.PauseState;
 import command.SaveState;
 import command.SpeedState;
-import tile.WorldGrid;
-import worldPanel.WorldPanel;
 
 
 

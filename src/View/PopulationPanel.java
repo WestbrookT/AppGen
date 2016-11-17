@@ -1,4 +1,4 @@
-package PopulationPanel;
+package View;
 
 import java.awt.*;
 import java.util.*;

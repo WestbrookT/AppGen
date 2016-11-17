@@ -13,7 +13,7 @@ import java.util.Properties;
 
 import javax.swing.AbstractButton;
 
-import neural.Creature;
+import Model.Creature;
 
 public class SaveState implements ActionListener, java.io.Serializable {
 	

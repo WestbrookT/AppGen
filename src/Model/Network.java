@@ -1,4 +1,4 @@
-package neural;
+package Model;
 
 import java.util.Arrays;
 

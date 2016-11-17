@@ -1,9 +1,7 @@
-package tile;
+package Model;
 
 import java.util.ArrayList;
 import java.util.Random;
-
-import neural.Creature;
 
 public class WorldGrid {
 	
@@ -20,7 +18,7 @@ public class WorldGrid {
 	
 	public WorldGrid(int xTileCount, int yTileCount, int tSize, int c) {
 		tiles = new Tile[xTileCount][yTileCount];
-		creatures = new Creature[xTileCount*10][yTileCount*10];
+		creatures = new Creature[xTileCount*tSize][yTileCount*tSize];
 		Random r = new Random();
 		cList = new ArrayList<Creature>();
 		cCount = c;
@@ -54,7 +52,35 @@ public class WorldGrid {
 		
 	}
 	
-	public WorldGrid(int xTileCount, int yTileCount, int tileSize, ArrayList<Creature> c) {
+	public WorldGrid(double[][][] map, int tSize, ArrayList<Creature> c) {
+		
+		xTiles = map.length;
+		yTiles = map[0].length;
+		
+		creatures = new Creature[xTiles*tSize][yTiles*tSize];
+		cCount = c.size();
+		tileSize = tSize;
+		cList = c;
+		
+		tiles = new Tile[xTiles][yTiles];
+		
+		for (int y = 0; y < yTiles; y++)
+			for (int x = 0; x < xTiles; x++) {
+				int r = (int)(map[x][y][0]*255);
+				int g = (int)(map[x][y][1]*255);
+				int b = (int)(map[x][y][2]*255);
+				tiles[x][y] = new Tile(r, g, b);
+			}
+		
+		
+		
+		for (Creature cr : c) {
+			int x = cr.getX();
+			int y = cr.getY();
+			
+			creatures[x][y] = cr;
+			tiles[(int)(x/10)][(int)(y/10)].addCreature(cr);
+		}
 		
 	}
 

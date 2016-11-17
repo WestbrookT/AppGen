@@ -1,4 +1,4 @@
-package AnalysisPanel;
+package View;
 
 import java.awt.*;
 import java.util.*;

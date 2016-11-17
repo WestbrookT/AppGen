@@ -1,8 +1,6 @@
-package tile;
+package Model;
 
 import java.util.ArrayList;
-
-import neural.Creature;
 
 public class Tile {
 	

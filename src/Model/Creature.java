@@ -1,11 +1,10 @@
-package neural;
+package Model;
 
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Random;
 
 import sun.nio.ch.Net;
-import tile.WorldGrid;
 
 public class Creature implements Serializable {
 	

@@ -1,12 +1,12 @@
-package worldPanel;
+package View;
 
 import java.awt.*;
 import java.util.*;
 import javax.swing.*;
 
-import neural.Creature;
-import tile.Tile;
-import tile.WorldGrid;
+import Model.Creature;
+import Model.Tile;
+import Model.WorldGrid;
 
 public class WorldPanel extends JPanel {
 
