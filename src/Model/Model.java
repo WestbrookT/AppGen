@@ -14,8 +14,22 @@ public class Model {
 	
 	private static WorldGrid world;
 	
+	public Model(int xTileCount, int yTileCount, int tSize, int c) {
+		world = new WorldGrid(xTileCount, yTileCount, tSize, c);
+	}
+	
+	public Model(int w, int h, int s, int l, int sm, int tileSize, int c) {
+		PerlinArray pa = new PerlinArray(w, h, s, l, s);
+		
+		world = new WorldGrid(pa.build(), tileSize, c);
+	}
+	
 	public Tile[][] getWorldState() {
-		return null;
+		return world.getTiles();
+	}
+	
+	public WorldGrid getWorldGrid() {
+		return world;
 	}
 	
 	public Creature[][] getCreatureState() {
@@ -35,6 +49,7 @@ public class Model {
 	}
 	
 	public void advance() {
+		world.advance();
 		
 	}
 	

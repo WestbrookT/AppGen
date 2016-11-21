@@ -83,11 +83,53 @@ public class WorldGrid {
 		}
 		
 	}
+	
+public WorldGrid(double[][][] map, int tSize, int c) {
+		
+		xTiles = map.length;
+		yTiles = map[0].length;
+		
+		creatures = new Creature[xTiles*tSize][yTiles*tSize];
+		cCount = c;
+		tileSize = tSize;
+		cList = new ArrayList<Creature>();
+		
+		
+		
+		
+		tiles = new Tile[xTiles][yTiles];
+		
+		for (int y = 0; y < yTiles; y++)
+			for (int x = 0; x < xTiles; x++) {
+				int r = (int)(map[x][y][0]*255);
+				int g = (int)(map[x][y][1]*255);
+				int b = (int)(map[x][y][2]*255);
+				tiles[x][y] = new Tile(r, g, b);
+			}
+		
+		Random r = new Random();
+		
+		for (int i = 0; i < c; i++) {
+			int x;
+			int y;
+			do {
+				x = r.nextInt(xTiles*tileSize);
+				y = r.nextInt(yTiles*tileSize);
+			} while (creatures[x][y] != null);
+			creatures[x][y] = new Creature(x, y, cStartSize, this);
+			cList.add(creatures[x][y]);
+			
+			int tX = (int)(x/tileSize);
+			int tY = (int)(y/tileSize);
+			tiles[tX][tY].addCreature(creatures[x][y]);
+		}
+		
+	}
 
 	public int consume(int xPos, int yPos, int r, int g, int b) {
 		// TODO Auto-generated method stub
-		int x = (int)(xPos/10);
-		int y = (int)(yPos/10);
+		int x = (int)(xPos/tileSize);
+		int y = (int)(yPos/tileSize);
 		
 		return tiles[x][y].consume(r, g, b);
 		
