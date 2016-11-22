@@ -8,7 +8,7 @@ public class WorldGrid {
 	private Tile[][] tiles;
 	public Creature[][] creatures;
 	private int tileSize;
-	private ArrayList<Creature> cList;
+	private static ArrayList<Creature> cList;
 	private int cCount;
 	private int cStartSize = 50;
 	
@@ -216,7 +216,7 @@ public WorldGrid(double[][][] map, int tSize, int c) {
 		
 	}
 	
-	public ArrayList<Creature> getCreatures() {
+	public static ArrayList<Creature> getCreatures() {
 		
 		
 		return cList;

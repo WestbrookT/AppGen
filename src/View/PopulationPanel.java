@@ -4,10 +4,11 @@ import java.awt.*;
 import java.util.*;
 import javax.swing.*;
 
-public class PopulationPanel extends JPanel {
+import Model.Creature;
+import Model.WorldGrid;
 
-    private int width = 800;
-    private int heigth = 400;
+public class PopulationPanel extends JPanel {
+	private ArrayList<Creature> currentPop;
     private int padding = 25;
     private int labelPadding = 25;
     private Color lineColor = new Color(44, 102, 230, 180);
@@ -16,10 +17,14 @@ public class PopulationPanel extends JPanel {
     private static final Stroke GRAPH_STROKE = new BasicStroke(2f);
     private int pointWidth = 4;
     private int numberYDivisions = 10;
-    private ArrayList<Integer> pop = new ArrayList <Integer> ();
+    private static ArrayList<Integer> pop;
+    private WorldGrid grid;
 
-    public PopulationPanel(ArrayList<Integer> pop) {
-        this.pop = pop;
+    public PopulationPanel(WorldGrid wg) {
+    	currentPop = grid.getCreatures();
+    	pop = new ArrayList <Integer> ();
+        pop.add(currentPop.size());
+        
     }
 
     @Override
@@ -27,9 +32,10 @@ public class PopulationPanel extends JPanel {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
-        double xScale = ((double) getWidth() - (2 * padding) - labelPadding) / (pop.size() - 1);
-        double yScale = ((double) getHeight() - 2 * padding - labelPadding) / (getMaxPop() - getMinPop());
+        currentPop = grid.getCreatures();
+        pop.add(currentPop.size());
+        double xScale = ((double) getWidth() - (2 * padding) - labelPadding) / (pop.size());
+        double yScale = ((double) getHeight() - 2 * padding - labelPadding) / (getMaxPop());
 
         ArrayList<Point> graphPoints = new ArrayList<>();
         for (int i = 0; i < pop.size(); i++) {
@@ -53,7 +59,7 @@ public class PopulationPanel extends JPanel {
                 g2.setColor(gridColor);
                 g2.drawLine(padding + labelPadding + 1 + pointWidth, y0, getWidth() - padding, y1);
                 g2.setColor(Color.BLACK);
-                String yLabel = ((int) ((getMinPop() + (getMaxPop() - getMinPop()) * ((i * 1.0) / numberYDivisions)) * 100)) / 100.0 + "";
+                String yLabel = ((getMaxPop() * ((i * 1.0) / numberYDivisions)) * 100) / 100.0 + "";
                 FontMetrics metrics = g2.getFontMetrics();
                 int labelWidth = metrics.stringWidth(yLabel);
                 g2.drawString(yLabel, x0 - labelWidth - 5, y0 + (metrics.getHeight() / 2) - 3);
@@ -64,20 +70,19 @@ public class PopulationPanel extends JPanel {
         // and for x axis
         for (int i = 0; i < pop.size(); i++) {
             if (pop.size() > 1) {
-                int x0 = i * (getWidth() - padding * 2 - labelPadding) / (pop.size() - 1) + padding + labelPadding;
+                int x0 = i * (getWidth() - padding * 2 - labelPadding) / (pop.size()) + padding + labelPadding;
                 int x1 = x0;
                 int y0 = getHeight() - padding - labelPadding;
                 int y1 = y0 - pointWidth;
                 if (i % ((pop.size() / 20) + 1) == 0) {
                     g2.setColor(gridColor);
-                    g2.drawLine(x0, getHeight() - padding - labelPadding - 1 - pointWidth, x1, padding);
+                    g2.drawLine(x0, getHeight() - padding - labelPadding - 1, x1, padding);
                     g2.setColor(Color.BLACK);
                     String xLabel = i + "";
                     FontMetrics metrics = g2.getFontMetrics();
                     int labelWidth = metrics.stringWidth(xLabel);
                     g2.drawString(xLabel, x0 - labelWidth / 2, y0 + metrics.getHeight() + 3);
                 }
-                g2.drawLine(x0, y0, x1, y1);
             }
         }
 
@@ -107,14 +112,6 @@ public class PopulationPanel extends JPanel {
         }
     }
 
-    private double getMinPop() {
-        double minPop = Integer.MAX_VALUE;
-        for (int population : pop) {
-            minPop = Math.min(minPop, population);
-        }
-        return minPop;
-    }
-
     private double getMaxPop() {
         double maxPop = Integer.MIN_VALUE;
         for (int population : pop) {
@@ -122,43 +119,5 @@ public class PopulationPanel extends JPanel {
         }
         return maxPop;
     }
-
-    public void setPop(ArrayList <Integer> pop, int [] population) {
-        this.pop = pop;
-        for(int temp : population){
-        	pop.add(temp);
-        }
-        invalidate();
-        this.repaint();
-    }
-
-    public ArrayList <Integer> getPop() {
-        return pop;
-    }
-
-    private static void createAndShowGui() {
-        ArrayList <Integer> pop = new ArrayList <Integer> ();
-        pop.add(1);
-        pop.add(25);
-        pop.add(17);
-        pop.add(29);
-        
-        
-        PopulationPanel mainPanel = new PopulationPanel(pop);
-        mainPanel.setPreferredSize(new Dimension(800, 600));
-        JFrame frame = new JFrame("Population");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().add(mainPanel);
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-    }
-
-    public static void main(String[] args) {
-      SwingUtilities.invokeLater(new Runnable() {
-         public void run() {
-            createAndShowGui();
-         }
-      });
-   }
+    
 }
