@@ -18,7 +18,6 @@ public class WorldPanel extends JPanel {
         grid = wg;
         creatureList = grid.getCreatures();
         tileSize = grid.getTileSize();
-        System.out.println(tileSize);
     }
 
     @Override
