@@ -1,5 +1,7 @@
 package command;
 
+import Model.Model;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -9,25 +11,25 @@ public class PauseState implements ActionListener {
 
 	AbstractButton button;
 	private int speed;
-	private double power;
+	private boolean paused;
+	private Model model;
 
-	public PauseState(AbstractButton button, int speed, double power) {
+	public PauseState(AbstractButton button, int speed, double power, Model model) {
 		this.button = button;
 		this.speed = speed;
-		this.power = power;
+
+		this.model = model;
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		if(speed != 0) {
-			speed = 0;
+
+
+		if (model.pause()) {
 			button.setText("Unpause");
 		}
-		else {
-			speed = (int) Math.pow(2, power);
-			button.setText("Pause");
-		}
+		else button.setText("Pause");
 
 	}
 

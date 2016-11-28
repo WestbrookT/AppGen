@@ -11,7 +11,8 @@ public class PerlinArray {
 	private int layers;
 	private int smooth;
 	private Random r;
-	
+
+	private double[][][] m;
 	
 	
 	public PerlinArray(int w, int h, int s, int l, int sm) {
@@ -43,7 +44,7 @@ public class PerlinArray {
 		
 		
 		
-		
+		this.m = m;
 		return m;
 	}
 	
@@ -128,24 +129,33 @@ public class PerlinArray {
 	}
 	
 	
-	public void thresh(double[][][] arr, int channel, double min) {
+	public void thresh(int channel, double min) {
 		
 		if (channel == 4) {
-			thresh(arr, 0, min);
-			thresh(arr, 1, min);
-			thresh(arr, 2, min);
+
+			for (int y = 0; y < height; y++) {
+				for (int x = 0; x < width; x++) {
+					double val = m[x][y][0] + m[x][y][1] + m[x][y][2];
+					if (val/3 < min) {
+						m[x][y][0] = 0;
+						m[x][y][1] = 0;
+						m[x][y][2] = 0;
+					}
+				}
+			}
+
+
 			return;
 		}
 		
 		
 		for (int y = 0; y < height; y++) {
 			for (int x = 0; x < width; x++) {
-				if (arr[x][y][channel] < min)
-					arr[x][y][channel] = 0;
+				if (m[x][y][channel] < min)
+					m[x][y][channel] = 0;
 			}
 		}
-		
-		
+
 	}
 	
 
@@ -156,7 +166,7 @@ public class PerlinArray {
 		double[][][] temp = pa.build();
 		
 		System.out.println(temp.length);
-		pa.thresh(temp, 4, .3);
+		pa.thresh( 4, .3);
 		
 		for (int y = 0; y < 20; y++) {
 			for (int x = 0; x < 20; x++) {

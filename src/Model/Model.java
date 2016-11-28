@@ -13,6 +13,8 @@ public class Model {
 	//private Creature creatures = new Creature();
 	
 	private static WorldGrid world;
+	private int speed = 1;
+	private boolean paused = false;
 	
 	public Model(int xTileCount, int yTileCount, int tSize, int c) {
 		world = new WorldGrid(xTileCount, yTileCount, tSize, c);
@@ -20,8 +22,20 @@ public class Model {
 	
 	public Model(int w, int h, int s, int l, int sm, int tileSize, int c) {
 		PerlinArray pa = new PerlinArray(w, h, s, l, s);
+		double[][][] map = pa.build();
+		pa.thresh(4, .31);
+
 		
-		world = new WorldGrid(pa.build(), tileSize, c);
+		world = new WorldGrid(map, tileSize, c);
+	}
+
+	public void setSpeed(int i) {
+		speed = i;
+	}
+
+	public boolean pause() {
+		paused = !paused;
+		return paused;
 	}
 	
 	public Tile[][] getWorldState() {
@@ -49,7 +63,10 @@ public class Model {
 	}
 	
 	public void advance() {
-		world.advance();
+		if (paused) return;
+
+		for (int i = 0; i < speed; i++)
+			world.advance();
 		
 	}
 	
@@ -125,7 +142,7 @@ public class Model {
 				System.out.println();
 			}
 			System.out.println(x);
-			for (int i = 0; i < 100000; i++)
+			for (int i = 0; i < 100000; i=i)
 				for (int j = 0; j < 20000; j++)
 					for (int k = 0; k < 1; k++)
 					{

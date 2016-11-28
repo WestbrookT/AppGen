@@ -39,6 +39,12 @@ public class Main extends JFrame{
 		add(panelNorth, BorderLayout.NORTH);
 		panelNorth.setLayout(new GridLayout(1, 4));
 		panelNorth.setBackground(Color.YELLOW);
+
+		
+		
+		
+		model = new Model(60, 30, 1, 29, 5, 10, 50);
+
 		LoadButton = new JButton("Load");
 		panelNorth.add(LoadButton);
 		SaveButton = new JButton("Save");
@@ -49,18 +55,12 @@ public class Main extends JFrame{
 		panelNorth.add(PauseButton);
 		LoadState loader = new LoadState(LoadButton);
 		LoadButton.addActionListener(loader);
-		SpeedState speeder = new SpeedState(SpeedButton, speed, power);
+		SpeedState speeder = new SpeedState(SpeedButton, speed, power, model);
 		SpeedButton.addActionListener(speeder);
 		SaveState saver = new SaveState(SaveButton);
 		SaveButton.addActionListener(saver);
-		PauseState pauser = new PauseState(PauseButton, speed, power);
+		PauseState pauser = new PauseState(PauseButton, speed, power, model);
 		PauseButton.addActionListener(pauser);
-		
-		
-		
-		model = new Model(50, 50, 10, 3, 10, 10, 10);
-		
-		
 		
 		JPanel panelCenter = new JPanel();
 		panelCenter.setLayout(new BoxLayout(panelCenter,BoxLayout.Y_AXIS));
@@ -76,15 +76,15 @@ public class Main extends JFrame{
 		// THIS IS PSUEDO CODE FOR NOW
 		Main window = new Main();
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		window.setSize(500, 500);
+		window.setSize(600, 700);
 		window.setVisible(true);
 		
-		for (int i = 0; i < 1000; i++) {
+		for (int i = 0; i < 1000000; i++) {
 			
 			window.model.advance();
 			window.panel.repaint();
 			window.panel1.repaint();
-			Thread.sleep(1000);
+			Thread.sleep(100);
 			
 		}
 		

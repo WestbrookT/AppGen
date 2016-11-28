@@ -84,7 +84,7 @@ public class WorldGrid {
 		
 	}
 	
-public WorldGrid(double[][][] map, int tSize, int c) {
+	public WorldGrid(double[][][] map, int tSize, int c) {
 		
 		xTiles = map.length;
 		yTiles = map[0].length;
@@ -151,9 +151,9 @@ public WorldGrid(double[][][] map, int tSize, int c) {
 	public int[] move(int xOld, int yOld, int xPos, int yPos) {
 		Creature c = creatures[xOld][yOld];
 		
-		if (xPos < 0 || xPos >= xTiles)
+		if (xPos < 0 || xPos >= xTiles*tileSize)
 			xPos = xOld;
-		if (yPos < 0 || yPos >= yTiles)
+		if (yPos < 0 || yPos >= yTiles*tileSize)
 			yPos = yOld;
 		
 		if (xPos == xOld && yPos == yOld) {
@@ -291,6 +291,10 @@ public WorldGrid(double[][][] map, int tSize, int c) {
 		for (int i = 0; i < cList.size(); i++) {
 			cList.get(i).act();
 		}
+		for (Tile[] col : tiles)
+			for (Tile t : col)
+				t.update();
+		tiles[0][0].incIter();
 	}
 
 	public int getXTiles() {

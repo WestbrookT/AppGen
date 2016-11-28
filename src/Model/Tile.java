@@ -28,84 +28,86 @@ public class Tile {
 	}
 	
 	public int getR() {
-		update();
+		//update();
 		return r;
 	}
 
 	public void setR(int r) {
-		update();
+		//update();
 		this.r = r;
 	}
 
 	public int getG() {
-		update();
+		//update();
 		return g;
 	}
 
 	public void setG(int g) {
-		update();
+		//update();
 		this.g = g;
 	}
 
 	public int getB() {
-		update();
+		//update();
 		return b;
 	}
 
 	public void setB(int b) {
-		update();
+		//update();
 		this.b = b;
 	}
 
 	public int getMaxR() {
-		update();
+		//update();
 		return maxR;
 	}
 
 	public void setMaxR(int maxR) {
-		update();
+		//update();
 		this.maxR = maxR;
 	}
 
 	public int getMaxG() {
-		update();
+		//update();
 		return maxG;
 	}
 
 	public void setMaxG(int maxG) {
-		update();
+		//update();
 		this.maxG = maxG;
 	}
 
 	public int getMaxB() {
-		update();
+		//update();
 		return maxB;
 	}
 
 	public void setMaxB(int maxB) {
-		update();
+		//update();
 		this.maxB = maxB;
 	}
 	
 	
 	
-	private void update() {
-		for (int i = lastIter; i < iter; i++)
-		{
-			while (r < maxR)
-				r++;
-			while (g < maxG)
-				g++;
-			while (b < maxB)
-				b++;
-		}
+	public void update() {
+		int diff = iter - lastIter;
+		
+		r = diff + r < maxR ? diff+r : maxR;
+		g = diff + g < maxG ? diff+g : maxG;
+		b = diff + b < maxB ? diff+b : maxB;
+		
+		
+		
 		lastIter = iter;
+	}
+	public void incIter() {
+		iter++;
 	}
 	
 
 	public int consume(int r2, int g2, int b2) {
 		// TODO Auto-generated method stub
-		update();
+		//update();
 		int out;
 		if (r2 == Math.max(r2, Math.max(g2, b2))) {
 			out = (int)(r*.1);

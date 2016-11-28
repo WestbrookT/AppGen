@@ -20,14 +20,14 @@ public class Creature implements Serializable {
 	private final double eyeMax = 5.0;
 	private double memory = 0.0;
 	
-	private double mutationRate = .5;
+	private double mutationRate = .1;
 	private double mutationSize = .1;
 	
 	public Creature(int x, int y, int size, WorldGrid grid) {
 		size = 100;
 		//inputs: rgbEye, mass/10, enemy(0, 1), rgbSelf 
 		// eyedis1 eyeDir movedis1 movedir2 attack1 eat1 reproduce
-		int[] layers = {9, 20, 10};
+		int[] layers = {9, 5, 10};
 		brain = new Network(layers);
 		r = 150;
 		g = 150;
@@ -91,7 +91,7 @@ public class Creature implements Serializable {
 				for (int weight = 0; weight < net[layer][neuron].length; weight++) {
 					if (r.nextDouble() > 1.0 - mutationRate) {
 						int dir = (r.nextInt() % 2 == 0) ? 1 : -1;
-						net[layer][neuron][weight] += dir*mutationSize;
+						net[layer][neuron][weight] += dir*net[layer][neuron][weight]*mutationSize;
 					}
 						
 				}
@@ -105,7 +105,7 @@ public class Creature implements Serializable {
 		check();
 		if (val > .7) {
 			//System.out.println("Kid made.");
-			int cost = (int)(size*.1)+5;
+			int cost = (int)(size*.4)+5;
 			size -= cost;
 			
 			Creature kid = child(cost);
@@ -118,17 +118,31 @@ public class Creature implements Serializable {
 	
 	private void move(double x, double y) {
 		check();
+
+//		if (x < 0 || y < 0) {
+//			System.out.println("x: " + x + ", y: " + y);
+//		}
 		
 		
 		
 		int xOld = xPos;
 		int yOld = yPos;
-		if (Math.abs(x) > .5) {
-			xPos += (int)Math.round(x);
+		if (Math.abs(x) > .3) {
+			if (x > 0) {
+				xPos++;
+
+			}
+			else {
+				xPos--;
+
+			}
 			
 		}
-		if (Math.abs(y) > .5) {
-			yPos += (int)Math.round(y);
+		if (Math.abs(y) > .3) {
+			if (y > 0)
+				yPos++;
+			else
+				yPos--;
 		}
 		int[] temp = world.move(xOld, yOld, xPos, yPos);
 		xPos = temp[0];

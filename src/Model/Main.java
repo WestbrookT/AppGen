@@ -28,35 +28,35 @@ public class Main extends JFrame{
 		backPanel.setLayout(new );
 		*/
 		//buttons for command panel
-		JPanel panelNorth = new JPanel();
-		add(panelNorth, BorderLayout.NORTH);
-		panelNorth.setLayout(new GridLayout(1, 4));
-		panelNorth.setBackground(Color.YELLOW);
-		LoadButton = new JButton("Load");
-		panelNorth.add(LoadButton);
-		SaveButton = new JButton("Save");
-		panelNorth.add(SaveButton);
-		SpeedButton = new JButton("Speed: x" + speed);
-		panelNorth.add(SpeedButton);
-		PauseButton = new JButton("Pause");
-		panelNorth.add(PauseButton);
-		LoadState loader = new LoadState(LoadButton);
-		LoadButton.addActionListener(loader);
-		SpeedState speeder = new SpeedState(SpeedButton, speed, power);
-		SpeedButton.addActionListener(speeder);
-		SaveState saver = new SaveState(SaveButton);
-		SaveButton.addActionListener(saver);
-		PauseState pauser = new PauseState(PauseButton, speed, power);
-		PauseButton.addActionListener(pauser);
-		WorldGrid wg = new WorldGrid(50,20,10,20);
-		JPanel panelCenter = new JPanel();
-		panelCenter.setLayout(new BoxLayout(panelCenter,BoxLayout.Y_AXIS));
-		add(panelCenter, BorderLayout.CENTER);
-		WorldPanel wp = new WorldPanel(wg);
-		panelCenter.add(wp);
-		JPanel dummyPanel = new JPanel();
-		dummyPanel.setBackground(Color.BLACK);
-		panelCenter.add(dummyPanel);
+//		JPanel panelNorth = new JPanel();
+//		add(panelNorth, BorderLayout.NORTH);
+//		panelNorth.setLayout(new GridLayout(1, 4));
+//		panelNorth.setBackground(Color.YELLOW);
+//		LoadButton = new JButton("Load");
+//		panelNorth.add(LoadButton);
+//		SaveButton = new JButton("Save");
+//		panelNorth.add(SaveButton);
+//		SpeedButton = new JButton("Speed: x" + speed);
+//		panelNorth.add(SpeedButton);
+//		PauseButton = new JButton("Pause");
+//		panelNorth.add(PauseButton);
+//		LoadState loader = new LoadState(LoadButton);
+//		LoadButton.addActionListener(loader);
+//		SpeedState speeder = new SpeedState(SpeedButton, speed, power, model);
+//		SpeedButton.addActionListener(speeder);
+//		SaveState saver = new SaveState(SaveButton);
+//		SaveButton.addActionListener(saver);
+//		PauseState pauser = new PauseState(PauseButton, speed, power);
+//		PauseButton.addActionListener(pauser);
+//		WorldGrid wg = new WorldGrid(50,20,10,20);
+//		JPanel panelCenter = new JPanel();
+//		panelCenter.setLayout(new BoxLayout(panelCenter,BoxLayout.Y_AXIS));
+//		add(panelCenter, BorderLayout.CENTER);
+//		WorldPanel wp = new WorldPanel(wg);
+//		panelCenter.add(wp);
+//		JPanel dummyPanel = new JPanel();
+//		dummyPanel.setBackground(Color.BLACK);
+//		panelCenter.add(dummyPanel);
 	}
 	
 	public static void main(String[] args) {

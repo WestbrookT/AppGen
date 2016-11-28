@@ -34,6 +34,8 @@ public class PopulationPanel extends JPanel {
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         currentPop = grid.getCreatures();
         pop.add(currentPop.size());
+        if (pop.size() > 100)
+            pop.remove(0);
         double xScale = ((double) getWidth() - (2 * padding) - labelPadding) / (pop.size());
         double yScale = ((double) getHeight() - 2 * padding - labelPadding) / (getMaxPop());
 
@@ -59,7 +61,7 @@ public class PopulationPanel extends JPanel {
                 g2.setColor(gridColor);
                 g2.drawLine(padding + labelPadding + 1 + pointWidth, y0, getWidth() - padding, y1);
                 g2.setColor(Color.BLACK);
-                String yLabel = ((getMaxPop() * ((i * 1.0) / numberYDivisions)) * 100) / 100.0 + "";
+                String yLabel = (int)((getMaxPop() * ((i * 1.0) / numberYDivisions)) * 100) / 100.0 + "";
                 FontMetrics metrics = g2.getFontMetrics();
                 int labelWidth = metrics.stringWidth(yLabel);
                 g2.drawString(yLabel, x0 - labelWidth - 5, y0 + (metrics.getHeight() / 2) - 3);

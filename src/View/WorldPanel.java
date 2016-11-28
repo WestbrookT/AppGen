@@ -27,8 +27,8 @@ public class WorldPanel extends JPanel {
         Graphics2D g2 = (Graphics2D) g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         Tile[][] tilesGrid = grid.getTiles();
-        for(int y=0;y<tilesGrid.length;y++) {
-        	for(int x=0;x<tilesGrid[y].length;x++) {
+        for(int y=0;y<tilesGrid[0].length;y++) {
+        	for(int x=0;x<tilesGrid.length;x++) {
         		g2.setColor(new Color(tilesGrid[x][y].getR(),tilesGrid[x][y].getG(),tilesGrid[x][y].getB()));
                 g2.fillRect(x*tileSize, y*tileSize, tileSize, tileSize);
         	}
