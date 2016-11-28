@@ -200,6 +200,10 @@ public class WorldGrid {
 		int xTile = (int)(x/tileSize);
 		int yTile = (int)(y/tileSize);
 		
+		int[] out = {0, 0, 0, 0};
+		if (x < 0 || x >= xTiles || y < 0 || y >= yTiles)
+			return out;
+		
 		
 		
 		return tiles[xTile][yTile].look(x, y);

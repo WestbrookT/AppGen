@@ -91,14 +91,15 @@ public class Tile {
 	
 	public void update() {
 		int diff = iter - lastIter;
+		diff = (int)(diff/10);
 		
 		r = diff + r < maxR ? diff+r : maxR;
 		g = diff + g < maxG ? diff+g : maxG;
 		b = diff + b < maxB ? diff+b : maxB;
 		
 		
-		
-		lastIter = iter;
+		if (diff != 0)
+			lastIter = iter;
 	}
 	public void incIter() {
 		iter++;
@@ -108,20 +109,21 @@ public class Tile {
 	public int consume(int r2, int g2, int b2) {
 		// TODO Auto-generated method stub
 		//update();
+		double val = .3;
 		int out;
 		if (r2 == Math.max(r2, Math.max(g2, b2))) {
-			out = (int)(r*.1);
-			r = (int)(r*.9);
+			out = (int)(r*val);
+			r = (int)(r*1-val);
 		} 
 		else if (g2 == Math.max(g2, b2)) {
-			out = (int)(g*.1);
-			g = (int)(g*.9);
+			out = (int)(g*val);
+			g = (int)(g*1-val);
 		}
 		else {
-			out = (int)(b*.1);
-			b = (int)(b*.9);
+			out = (int)(b*val);
+			b = (int)(b*1-val);
 		}
-		return out;
+		return out/2;
 	}
 	
 	public ArrayList<Creature> getCreatures() {

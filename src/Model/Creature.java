@@ -16,18 +16,18 @@ public class Creature implements Serializable {
 	
 	private WorldGrid world;
 	private double angle;
-	private double eyeDis;
-	private final double eyeMax = 5.0;
+	private double eyeDis = 1;
+	private final double eyeMax = 1.0;
 	private double memory = 0.0;
 	
-	private double mutationRate = .1;
+	private double mutationRate = .4;
 	private double mutationSize = .1;
 	
 	public Creature(int x, int y, int size, WorldGrid grid) {
-		size = 100;
+		this.size = size;
 		//inputs: rgbEye, mass/10, enemy(0, 1), rgbSelf 
 		// eyedis1 eyeDir movedis1 movedir2 attack1 eat1 reproduce
-		int[] layers = {9, 5, 10};
+		int[] layers = {10, 10, 10};
 		brain = new Network(layers);
 		r = 150;
 		g = 150;
@@ -39,14 +39,14 @@ public class Creature implements Serializable {
 	}
 	
 	public Creature(int x, int y, int size, WorldGrid grid, double[][][] net) {
-		size = 100;
+		this.size = size;
 		//inputs: rgbEye, mass/10, enemy(0, 1), rgbSelf 
 		// eyedis1 eyeDir movedis1 movedir2 attack1 eat1 reproduce
 		
 		brain = new Network(net);
-		r = 150;
-		g = 150;
-		b = 150;
+		r = 250;
+		g = 250;
+		b = 250;
 		xPos = x;
 		yPos = y;
 		world = grid;
@@ -61,9 +61,9 @@ public class Creature implements Serializable {
 	
 	private void eat(double val) {
 		check();
-		int cost = (int)(size*.05)+1;
+		int cost = 1;
 		size -= cost;
-		if (val > .5) {
+		if (val > .3) {
 			
 			size += world.consume(xPos, yPos, r, g, b);
 		}
@@ -105,7 +105,9 @@ public class Creature implements Serializable {
 		check();
 		if (val > .7) {
 			//System.out.println("Kid made.");
-			int cost = (int)(size*.4)+5;
+			if (size < 30)
+				return;
+			int cost = (int)(size*.5);
 			size -= cost;
 			
 			Creature kid = child(cost);
@@ -182,9 +184,9 @@ public class Creature implements Serializable {
 		 */
 		
 		// Get all the inputs set up.
-		size -= 1;
+		size -= 4;
 		
-		double[] inputs = new double[9];
+		double[] inputs = new double[10];
 		int[] rgbe = look(true);
 		for (int i = 0; i < rgbe.length-1; i++) {
 			inputs[i] = rgbe[i]/255.0;
@@ -200,6 +202,7 @@ public class Creature implements Serializable {
 		}
 		
 		inputs[8] = memory;
+		inputs[9] = angle;
 		
 		double[] decisions = brain.out(inputs);
 		if (decisions.length < 1) {
@@ -229,8 +232,11 @@ public class Creature implements Serializable {
 		//Change the color of the creature to match its decisions.
 		
 		r = (int)(255*((1+decisions[5])/2));
+		
+			
 		g = (int)(255*((1+decisions[6])/2));
 		b = (int)(255*((1+decisions[7])/2));
+		//System.out.println("Why? "+ r + " " + g + " " + b);
 		
 		// Update the memory variable
 		memory = decisions[8];
@@ -272,6 +278,16 @@ public class Creature implements Serializable {
 		// TODO Auto-generated method stub
 		//System.out.println(r);
 		return r;
+	}
+
+	public int getG() {
+		// TODO Auto-generated method stub
+		return g;
+	}
+
+	public int getB() {
+		// TODO Auto-generated method stub
+		return b;
 	}
 	
 	

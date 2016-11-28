@@ -34,8 +34,8 @@ public class WorldPanel extends JPanel {
         	}
         }
         for(Creature c : creatureList) {
-        	g2.setColor(Color.BLACK);
-        	g2.fillOval(c.getX(), c.getY(),3,3);
+        	g2.setColor(new Color(c.getR(), c.getG(), c.getB()));
+        	g2.fillOval(c.getX()-2, c.getY()-2,5,5);
         }
     }
 

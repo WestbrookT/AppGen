@@ -43,7 +43,7 @@ public class Main extends JFrame{
 		
 		
 		
-		model = new Model(60, 30, 1, 29, 5, 10, 50);
+		model = new Model(60, 30, 5, 29, 10, 10, 20);
 
 		LoadButton = new JButton("Load");
 		panelNorth.add(LoadButton);
@@ -76,7 +76,7 @@ public class Main extends JFrame{
 		// THIS IS PSUEDO CODE FOR NOW
 		Main window = new Main();
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		window.setSize(600, 700);
+		window.setSize(610, 720);
 		window.setVisible(true);
 		
 		for (int i = 0; i < 1000000; i++) {

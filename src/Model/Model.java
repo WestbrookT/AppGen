@@ -23,7 +23,7 @@ public class Model {
 	public Model(int w, int h, int s, int l, int sm, int tileSize, int c) {
 		PerlinArray pa = new PerlinArray(w, h, s, l, s);
 		double[][][] map = pa.build();
-		pa.thresh(4, .31);
+		pa.thresh(4, .3);
 
 		
 		world = new WorldGrid(map, tileSize, c);
