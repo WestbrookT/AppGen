@@ -7,6 +7,7 @@ import javax.swing.text.View;
 
 import Model.Model;
 import Model.WorldGrid;
+import View.AnalysisPanel;
 import View.PopulationPanel;
 import View.WorldPanel;
 import command.LoadState;
@@ -25,7 +26,8 @@ public class Main extends JFrame{
 	
 	private Model model;
 	private WorldPanel panel;
-	private PopulationPanel panel1;
+	private PopulationPanel pp;
+	private AnalysisPanel ap;
 	
 	private static int speed = 1;
 	private static double power = 0;
@@ -67,8 +69,14 @@ public class Main extends JFrame{
 		add(panelCenter, BorderLayout.CENTER);
 		panel = new WorldPanel(model.getWorldGrid());
 		panelCenter.add(panel);
-		panel1 = new PopulationPanel(model.getWorldGrid());
-		panelCenter.add(panel1);
+		pp = new PopulationPanel(model.getWorldGrid());
+		ap = new AnalysisPanel(model.getWorldGrid());
+		JPanel panelBottom = new JPanel();
+		panelBottom.setLayout(new BoxLayout(panelBottom, BoxLayout.LINE_AXIS));
+		panelBottom.add(pp);
+		panelBottom.add(ap);
+		panelCenter.add(panelBottom);
+		
 	}
 	
 	public static void main(String[] args) throws InterruptedException {
@@ -83,7 +91,7 @@ public class Main extends JFrame{
 			
 			window.model.advance();
 			window.panel.repaint();
-			window.panel1.repaint();
+			window.pp.repaint();
 			Thread.sleep(100);
 			
 		}
