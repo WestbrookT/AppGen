@@ -74,11 +74,13 @@ public class Model implements Serializable {
 	public static Creature getNearestCreature(int x, int y) {
 		ArrayList<Creature> creatures = world.getCreatures();
 		Creature nearestCreature = creatures.get(0);
-		for(Creature creature : creatures){
-			if((Math.abs(creature.getX()-x) + Math.abs(creature.getY()-y)) < (Math.abs(nearestCreature.getX()-x)+Math.abs(nearestCreature.getY()-y))){
-				nearestCreature = creature;
+		try {
+			for(Creature creature : creatures){
+				if((Math.abs(creature.getX()-x) + Math.abs(creature.getY()-y)) < (Math.abs(nearestCreature.getX()-x)+Math.abs(nearestCreature.getY()-y))){
+					nearestCreature = creature;
+				}
 			}
-		}
+		} catch(Exception e){}
 		return nearestCreature;
 	}
 	

@@ -33,10 +33,12 @@ public class WorldPanel extends JPanel {
                 g2.fillRect(x*tileSize, y*tileSize, tileSize, tileSize);
         	}
         }
-        for(Creature c : creatureList) {
-        	g2.setColor(new Color(c.getR(), c.getG(), c.getB()));
-        	g2.fillOval(c.getX()-2, c.getY()-2,5,5);
-        }
+        try {
+        	for(Creature c : creatureList) {
+        		g2.setColor(new Color(c.getR(), c.getG(), c.getB()));
+        		g2.fillOval(c.getX()-2, c.getY()-2,5,5);
+        	}
+        } catch(Exception E) {}
     }
 
     public WorldGrid getGrid() {
