@@ -70,8 +70,15 @@ public class Model {
 		
 	}
 	
-	public Creature getNearestCreature(int x, int y) {
-		return null;
+	public static Creature getNearestCreature(int x, int y) {
+		ArrayList<Creature> creatures = world.getCreatures();
+		Creature nearestCreature = creatures.get(0);
+		for(Creature creature : creatures){
+			if((Math.abs(creature.getX()-x) + Math.abs(creature.getY()-y)) < (Math.abs(nearestCreature.getX()-x)+Math.abs(nearestCreature.getY()-y))){
+				nearestCreature = creature;
+			}
+		}
+		return nearestCreature;
 	}
 	
 	public ArrayList<Creature> getCreatures() {

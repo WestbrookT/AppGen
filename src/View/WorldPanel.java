@@ -7,6 +7,7 @@ import javax.swing.*;
 import Model.Creature;
 import Model.Tile;
 import Model.WorldGrid;
+import command.CreatureSelection;
 
 public class WorldPanel extends JPanel {
 

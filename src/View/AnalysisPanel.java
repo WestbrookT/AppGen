@@ -5,15 +5,27 @@ import java.util.ArrayList;
 import javax.swing.*;
 
 import Model.Creature;
+import Model.Model;
 import Model.WorldGrid;
+import command.CreatureSelection;
+import main.Main;
 
 public class AnalysisPanel extends JPanel {
 	private double[][][] network;
 	private ArrayList<Creature> currentPop;
+	private Creature nearestCreature;
 
 	public AnalysisPanel(WorldGrid grid) {
 		currentPop = grid.getCreatures();
-		network = currentPop.get(0).weights();	
+		this.nearestCreature = CreatureSelection.nearestCreature();
+		
+		if(nearestCreature == null){
+			network = currentPop.get(0).weights();
+		}
+		else{
+			network = nearestCreature.weights();
+		}
+		
 	}
 	
 	protected void paintComponent(Graphics g) {
@@ -21,7 +33,11 @@ public class AnalysisPanel extends JPanel {
         Graphics2D g2 = (Graphics2D) g;
         g2.setColor(Color.WHITE);
         g2.fillRect(0, 0, getWidth(), getHeight());
-          
+        nearestCreature = CreatureSelection.nearestCreature();
+        if(nearestCreature != null){
+        	network = nearestCreature.weights();
+        }
+        
         int i = 0;
         for (i = 0; i < network.length; i++) {
         	g2.setColor(Color.BLACK);
@@ -29,7 +45,7 @@ public class AnalysisPanel extends JPanel {
         		if (i<network.length-1){
         			for (int j = 0; j < network[i][p-1].length; j++) {
         				if (network[i][p-1][j] != 0){
-        					float weight = (float) (1/(1+Math.exp(-(Math.abs(network[i][p-1][j])))))*5;					
+        					float weight = ((float) (1/(1+Math.exp(-(Math.abs(network[i][p-1][j]))))))*1;					
         					g2.setStroke(new BasicStroke(weight));
         					if (network[i][p-1][j] < 0){
         						g2.setColor(Color.RED);
