@@ -1,8 +1,9 @@
 package Model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Tile {
+public class Tile implements Serializable {
 	
 	private int r;
 	private int g;

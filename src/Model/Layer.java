@@ -1,8 +1,8 @@
 package Model;
 
+import java.io.Serializable;
 
-
-public class Layer {
+public class Layer  implements Serializable {
 
 	
 

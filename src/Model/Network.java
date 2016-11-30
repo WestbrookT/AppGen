@@ -2,11 +2,12 @@ package Model;
 
 
 
+import java.io.Serializable;
 import java.util.Arrays;
 
 
 
-public class Network {
+public class Network implements Serializable {
 
 	
 

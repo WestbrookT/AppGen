@@ -68,10 +68,7 @@ public class Main extends JFrame{
 	private Creature nearestCreature;
 
 	
-	
 	private static int speed = 1;
-	
-	private static double power = 0;
 	
 	
 	public Main() {
@@ -119,19 +116,19 @@ public class Main extends JFrame{
 		
 		panelNorth.add(PauseButton);
 		
-		LoadState loader = new LoadState(LoadButton);
+		LoadState loader = new LoadState(LoadButton, model);
 		
 		LoadButton.addActionListener(loader);
 		
-		SpeedState speeder = new SpeedState(SpeedButton, speed, power, model);
+		SpeedState speeder = new SpeedState(SpeedButton, speed, model);
 		
 		SpeedButton.addActionListener(speeder);
 		
-		SaveState saver = new SaveState(SaveButton);
+		SaveState saver = new SaveState(SaveButton, model);
 		
 		SaveButton.addActionListener(saver);
 		
-		PauseState pauser = new PauseState(PauseButton, speed, power, model);
+		PauseState pauser = new PauseState(PauseButton, speed, model);
 		
 		PauseButton.addActionListener(pauser);
 	

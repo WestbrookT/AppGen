@@ -1,9 +1,10 @@
 package Model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class WorldGrid {
+public class WorldGrid implements Serializable {
 	
 	private Tile[][] tiles;
 	public Creature[][] creatures;
