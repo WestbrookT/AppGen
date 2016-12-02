@@ -19,7 +19,7 @@ public class LoadState implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
+		model.pause();
 		String file = JOptionPane.showInputDialog("Enter file name: (include extension)");
 		System.out.println(file + " trying to load...");
 		model.load(file);
@@ -28,6 +28,7 @@ public class LoadState implements ActionListener {
 		} catch (Exception ex) {
 			System.out.println("Errored.");
 		}
+		model.pause();
 	}
 
 }

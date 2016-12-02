@@ -119,7 +119,7 @@ public class Creature implements Serializable {
 	
 	
 	
-	private void move(double x, double y) {
+	private void move(double mv, double direct) {
 		check();
 
 //		if (x < 0 || y < 0) {
@@ -130,23 +130,12 @@ public class Creature implements Serializable {
 		
 		int xOld = xPos;
 		int yOld = yPos;
-		if (Math.abs(x) > .3) {
-			if (x > 0) {
-				xPos++;
-
-			}
-			else {
-				xPos--;
-
-			}
-			
-		}
-		if (Math.abs(y) > .3) {
-			if (y > 0)
-				yPos++;
-			else
-				yPos--;
-		}
+		
+		int[] mvs = Direction.delta(mv, direct);
+		
+		xPos += mvs[0];
+		yPos += mvs[1];
+		
 		int[] temp = world.move(xOld, yOld, xPos, yPos);
 		xPos = temp[0];
 		yPos = temp[1];
@@ -223,8 +212,9 @@ public class Creature implements Serializable {
 		 * This is the part where the network makes decisions.
 		 */
 		
-		move(decisions[0], decisions[1]);
+		
 		angle = decisions[2];
+		move(angle, decisions[1]);
 		attack(decisions[3]);
 		reproduce(decisions[4]);
 		eat(decisions[9]);

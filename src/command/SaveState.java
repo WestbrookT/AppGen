@@ -19,9 +19,10 @@ public class SaveState implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-
+		model.pause();
 		String file = JOptionPane.showInputDialog("Enter file name: (include extension)");
 		model.save(file);
+		model.pause();
 	}
 
 }
