@@ -22,6 +22,13 @@ public class Model implements Serializable {
 	private int tS;
 	private int c;
 	
+	private int width;
+	private int height;
+	private int ms;
+	private int layers;
+	private int smooth;
+	
+	
 	public Model(int xTileCount, int yTileCount, int tSize, int c) {
 		world = new WorldGrid(xTileCount, yTileCount, tSize, c);
 		xT = xTileCount;
@@ -31,13 +38,30 @@ public class Model implements Serializable {
 	}
 	
 	public void reset() {
-		world = new WorldGrid(xT, yT, tS, c);
+		
+		
+		
+		PerlinArray pa = new PerlinArray(width, height, ms, layers, ms);
+		double[][][] map = pa.build();
+		pa.thresh(4, .3);
+		
+		
+
+		
+		world = new WorldGrid(map, tS, c);
 	}
 	
 	public Model(int w, int h, int s, int l, int sm, int tileSize, int c) {
 		PerlinArray pa = new PerlinArray(w, h, s, l, s);
 		double[][][] map = pa.build();
 		pa.thresh(4, .3);
+		
+		width = w;
+		height = h;
+		ms = s;
+		layers = l;
+		tS = tileSize;
+		this.c = c;
 
 		
 		world = new WorldGrid(map, tileSize, c);
