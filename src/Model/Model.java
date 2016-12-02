@@ -17,8 +17,21 @@ public class Model implements Serializable {
 	private int speed = 1;
 	private boolean paused = false;
 	
+	private int xT;
+	private int yT;
+	private int tS;
+	private int c;
+	
 	public Model(int xTileCount, int yTileCount, int tSize, int c) {
 		world = new WorldGrid(xTileCount, yTileCount, tSize, c);
+		xT = xTileCount;
+		yT = yTileCount;
+		tS = tSize;
+		this.c = c;
+	}
+	
+	public void reset() {
+		world = new WorldGrid(xT, yT, tS, c);
 	}
 	
 	public Model(int w, int h, int s, int l, int sm, int tileSize, int c) {
