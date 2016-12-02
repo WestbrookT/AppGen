@@ -52,12 +52,12 @@ public class AnalysisPanel extends JPanel {
         					} else {
         						g2.setColor(new Color(Math.min(255, (int)(255*Math.abs(weight))), Math.min(255, Math.abs((int)(255*weight))), Math.min(255, Math.abs((int)(255*weight)))));
         					}
-            				g2.drawLine((getWidth()/4)*(i+1)+(getHeight()/16)/2,(p*getHeight()/(network[i].length + 1)),(getWidth()/4)*(i+2)+(getHeight()/16)/2,((j+1)*getHeight()/(network[i][p-1].length + 1)));
+            				g2.drawLine((getWidth()/(network.length+1))*(i+1)+(getHeight()/16)/2,(p*getHeight()/(network[i].length + 1)),(getWidth()/(network.length+1))*(i+2)+(getHeight()/16)/2,((j+1)*getHeight()/(network[i][p-1].length + 1)));
         				}
         			}
         		}
         		g2.setColor(Color.BLACK);
-        		g2.fillOval((getWidth()/4)*(i+1), (p * getHeight()/(network[i].length + 1))-(getHeight()/16)/2, (getHeight()/16), getHeight()/16);
+        		g2.fillOval((getWidth()/(network.length+1))*(i+1), (p * getHeight()/(network[i].length + 1))-(getHeight()/16)/2, (getHeight()/16), getHeight()/16);
         	}
         }
 	}
