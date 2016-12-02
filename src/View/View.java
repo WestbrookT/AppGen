@@ -12,6 +12,7 @@ import View.WorldPanel;
 import command.CreatureSelection;
 import command.LoadState;
 import command.PauseState;
+import command.ResetState;
 import command.SaveState;
 import command.SpeedState;
 
@@ -20,6 +21,7 @@ public class View extends JFrame{
 	private JButton SpeedButton;
 	private JButton SaveButton;
 	private JButton PauseButton;
+	private JButton ResetButton;
 	
 	public WorldPanel panel;
 	public PopulationPanel pp;
@@ -43,6 +45,8 @@ public class View extends JFrame{
 		panelNorth.add(SpeedButton);
 		PauseButton = new JButton("Pause");
 		panelNorth.add(PauseButton);
+		ResetButton = new JButton("Reset");
+		panelNorth.add(ResetButton);
 		
 		LoadState loader = new LoadState(LoadButton, model);
 		LoadButton.addActionListener(loader);
@@ -52,6 +56,9 @@ public class View extends JFrame{
 		SaveButton.addActionListener(saver);
 		PauseState pauser = new PauseState(PauseButton, speed, model);
 		PauseButton.addActionListener(pauser);
+		
+		ResetState resetter = new ResetState(ResetButton, model);
+		ResetButton.addActionListener(resetter);
 	
 		JPanel panelCenter = new JPanel();	
 		panelCenter.setLayout(new BoxLayout(panelCenter,BoxLayout.Y_AXIS));
