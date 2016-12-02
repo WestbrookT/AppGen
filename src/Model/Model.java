@@ -94,6 +94,8 @@ public class Model implements Serializable {
 			FileInputStream wIn = new FileInputStream(filename);
 			ObjectInputStream in = new ObjectInputStream(wIn);
 			loaded = (WorldGrid) in.readObject();
+
+
 		} catch (EOFException z) {
 			System.out.println("end of file");
 		} catch (IOException j) {
@@ -103,21 +105,28 @@ public class Model implements Serializable {
 			System.out.println("class not found");
 			y.printStackTrace();
 			return;
-		} 
-		world = loaded;
+		}
+		Model.world = null;
+		Model.world = loaded;
+
+
+
+	}
+	public void setWorld(WorldGrid w) {
+		world = w;
 	}
 	
 	public static void main(String[] args) {
 		
 		
 		world = new WorldGrid(10, 20, 2, 10);
-		
-		
+
+
 		Creature[][] c = world.getArrayCreatures();
-		
-		
+
+
 		for (int i = 0; i < 10; i++) {
-			
+
 			for (int j = 0; j < 10; j++)
 				if (c[i][j] != null)
 					System.out.print(" X");
@@ -125,25 +134,25 @@ public class Model implements Serializable {
 					System.out.print(" .");
 			System.out.println();
 		}
-		
-		
+
+
 		int ts = world.getTileSize();
 		int xs = world.getXTiles();
 		int ys = world.getYTiles();
-		
+
 		for (int x = 0; x < 1000000; x++) {
 			world.advance();
 			if (x% 1000 == 0)
 				System.out.println(x);
 		}
-		
+
 		for (int x = 0; x < 1000; x++) {
 			world.advance();
-			
-			
+
+
 			System.out.println("\n\n\n\n\n\n\n\n");
 			for (int i = 0; i < xs*ts; i++) {
-				
+
 				for (int j = 0; j < ys*ts; j++)
 					if (c[i][j] != null)
 						System.out.print(" " + (int)(c[i][j].getR()/255.0*10));
@@ -160,7 +169,7 @@ public class Model implements Serializable {
 					}
 	
 			
-		}		
+		}
 	}
 
 	

@@ -48,9 +48,9 @@ public class AnalysisPanel extends JPanel {
         					float weight = ((float) (1/(1+Math.exp(-(Math.abs(network[i][p-1][j]))))))*1;					
         					g2.setStroke(new BasicStroke(weight));
         					if (network[i][p-1][j] < 0){
-        						g2.setColor(Color.RED);
+								g2.setColor(new Color(255, Math.min(255, Math.abs((int)(255*weight))), Math.min(255, Math.abs((int)(255*weight)))));
         					} else {
-        						g2.setColor(Color.BLACK);
+        						g2.setColor(new Color(Math.min(255, (int)(255*Math.abs(weight))), Math.min(255, Math.abs((int)(255*weight))), Math.min(255, Math.abs((int)(255*weight)))));
         					}
             				g2.drawLine((getWidth()/4)*(i+1)+(getHeight()/16)/2,(p*getHeight()/(network[i].length + 1)),(getWidth()/4)*(i+2)+(getHeight()/16)/2,((j+1)*getHeight()/(network[i][p-1].length + 1)));
         				}

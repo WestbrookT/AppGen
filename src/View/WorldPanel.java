@@ -5,20 +5,21 @@ import java.util.*;
 import javax.swing.*;
 
 import Model.Creature;
+import Model.Model;
 import Model.Tile;
 import Model.WorldGrid;
 import command.CreatureSelection;
 
 public class WorldPanel extends JPanel {
 
-    private WorldGrid grid;
+    private Model model;
     private ArrayList<Creature> creatureList;
     private int tileSize;
     
-    public WorldPanel(WorldGrid wg) {
-        grid = wg;
-        creatureList = grid.getCreatures();
-        tileSize = grid.getTileSize();
+    public WorldPanel(Model model) {
+        this.model = model;
+        creatureList = model.getWorldGrid().getCreatures();
+        tileSize = model.getWorldGrid().getTileSize();
     }
 
     @Override
@@ -26,22 +27,25 @@ public class WorldPanel extends JPanel {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        Tile[][] tilesGrid = grid.getTiles();
-        for(int y=0;y<tilesGrid[0].length;y++) {
-        	for(int x=0;x<tilesGrid.length;x++) {
-        		g2.setColor(new Color(tilesGrid[x][y].getR(),tilesGrid[x][y].getG(),tilesGrid[x][y].getB()));
-                g2.fillRect(x*tileSize, y*tileSize, tileSize, tileSize);
-        	}
+        Tile[][] tilesGrid = model.getWorldGrid().getTiles();
+
+        try {
+            for (int y = 0; y < tilesGrid[0].length; y++) {
+                for (int x = 0; x < tilesGrid.length; x++) {
+                    g2.setColor(new Color(tilesGrid[x][y].getR(), tilesGrid[x][y].getG(), tilesGrid[x][y].getB()));
+                    g2.fillRect(x * tileSize, y * tileSize, tileSize, tileSize);
+                }
+            }
+        } catch (Exception e) {
+
         }
         try {
-        	for(Creature c : creatureList) {
+        	for(Creature c : model.getCreatures()) {
         		g2.setColor(new Color(c.getR(), c.getG(), c.getB()));
-        		g2.fillOval(c.getX()-2, c.getY()-2,5,5);
+        		g2.fillOval(c.getX()-2, c.getY()-2,(int)Math.sqrt(c.getSize())+1,(int)Math.sqrt(c.getSize())+1);
         	}
         } catch(Exception E) {}
     }
 
-    public WorldGrid getGrid() {
-        return grid;
-    }
+
 }

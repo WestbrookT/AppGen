@@ -20,8 +20,8 @@ public class Creature implements Serializable {
 	private final double eyeMax = 1.0;
 	private double memory = 0.0;
 	
-	private double mutationRate = .4;
-	private double mutationSize = .1;
+	private double mutationRate = .7;
+	private double mutationSize = 1.2;
 	
 	public Creature(int x, int y, int size, WorldGrid grid) {
 		this.size = size;
@@ -74,8 +74,9 @@ public class Creature implements Serializable {
 		int cost =  (int)(size*.06)+1;
 		size -= cost;
 		if (val > .5) {
-			
+
 			size += world.attack(xPos, yPos, size);
+
 		}
 		
 	}
@@ -107,7 +108,7 @@ public class Creature implements Serializable {
 			//System.out.println("Kid made.");
 			if (size < 30)
 				return;
-			int cost = (int)(size*.5);
+			int cost = (int)(size*.6);
 			size -= cost;
 			
 			Creature kid = child(cost);
@@ -288,6 +289,10 @@ public class Creature implements Serializable {
 	public int getB() {
 		// TODO Auto-generated method stub
 		return b;
+	}
+
+	public int getSize() {
+		return size;
 	}
 	
 	

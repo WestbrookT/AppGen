@@ -21,7 +21,13 @@ public class LoadState implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		
 		String file = JOptionPane.showInputDialog("Enter file name: (include extension)");
+		System.out.println(file + " trying to load...");
 		model.load(file);
+		try {
+			Thread.sleep(1000);
+		} catch (Exception ex) {
+			System.out.println("Errored.");
+		}
 	}
 
 }

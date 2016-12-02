@@ -140,7 +140,7 @@ public class Main extends JFrame{
 		
 		add(panelCenter, BorderLayout.CENTER);
 		
-		panel = new WorldPanel(model.getWorldGrid());
+		panel = new WorldPanel(model);
 		
 		panelCenter.add(panel);
 		

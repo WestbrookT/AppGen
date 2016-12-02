@@ -110,21 +110,21 @@ public class Tile implements Serializable {
 	public int consume(int r2, int g2, int b2) {
 		// TODO Auto-generated method stub
 		//update();
-		double val = .3;
+		double val = .1;
 		int out;
 		if (r2 == Math.max(r2, Math.max(g2, b2))) {
 			out = (int)(r*val);
-			r = (int)(r*1-val);
+			r = (int)(r*(1-val));
 		} 
 		else if (g2 == Math.max(g2, b2)) {
 			out = (int)(g*val);
-			g = (int)(g*1-val);
+			g = (int)(g*(1-val));
 		}
 		else {
 			out = (int)(b*val);
-			b = (int)(b*1-val);
+			b = (int)(b*(1-val));
 		}
-		return out/2;
+		return out*2;
 	}
 	
 	public ArrayList<Creature> getCreatures() {
