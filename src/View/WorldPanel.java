@@ -42,7 +42,7 @@ public class WorldPanel extends JPanel {
         try {
         	for(Creature c : model.getCreatures()) {
         		g2.setColor(new Color(c.getR(), c.getG(), c.getB()));
-        		g2.fillOval(c.getX()-2, c.getY()-2,(int)Math.sqrt(c.getSize())+1,(int)Math.sqrt(c.getSize())+1);
+        		g2.fillOval(c.getX()-((int)Math.sqrt(c.getSize()))/2, c.getY()-((int)Math.sqrt(c.getSize()))/2,(int)Math.sqrt(c.getSize())+1,(int)Math.sqrt(c.getSize())+1);
         	}
         } catch(Exception E) {}
     }
