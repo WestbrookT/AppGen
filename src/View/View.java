@@ -69,8 +69,8 @@ public class View extends JFrame{
 		
 		JPanel panelBottom = new JPanel();
 		panelBottom.setLayout(new BoxLayout(panelBottom, BoxLayout.LINE_AXIS));
-		pp = new PopulationPanel(model.getWorldGrid());
-		ap = new AnalysisPanel(model.getWorldGrid());
+		pp = new PopulationPanel(model);
+		ap = new AnalysisPanel(model);
 		panelBottom.add(pp);
 		panelBottom.add(ap);
 		panelCenter.add(panelBottom);

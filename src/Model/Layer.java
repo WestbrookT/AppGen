@@ -4,77 +4,41 @@ import java.io.Serializable;
 
 public class Layer  implements Serializable {
 
-	
-
-	Neuron[] neurons = null;
-	
+	Neuron[] neurons = null;	
 	private int size;
 	
-	
-	
 	public Layer(int lastCount, int s) {
-		
 		if (s < 1)
-			
 			System.exit(-5);
 		
 		neurons = new Neuron[s];
-		
 		size = s;
 		
 		if (size < 1)
-			
 			System.out.println("ERROR" + s);
-	
-	
-		
-		
-		for (int i = 0; i < size; i++) {
-			
+
+		for (int i = 0; i < size; i++) {			
 			neurons[i] = new Neuron(lastCount);
-		
 		}
-		
-	
 	}
 	
-	
-	
-	public Layer(double[][] ds) {
-		
+	public Layer(double[][] ds) {	
 		neurons = new Neuron[ds.length];
 
-		
-		
-		for (int i = 0; i < ds.length; i++) {
-			
+		for (int i = 0; i < ds.length; i++) {			
 			neurons[i] = new Neuron(ds[i]);
-		
 		}
-		
-	
 	}
 
-	
-
-	public double[] out(double[] inputs) {
-		
+	public double[] out(double[] inputs) {		
 		double[] outs = new double[neurons.length];
-
-		
-		
 		
 		for (int i = 0; i < neurons.length; i++) {
-			
 			outs[i] = neurons[i].out(inputs);
-		
 		}
 		
 		return outs;
-	
 	}
-	
-	
 	
 	/**
 	 
@@ -83,31 +47,17 @@ public class Layer  implements Serializable {
 	 * @return Returns an array of double[] each of which contains a neurons set of weights.
 	 
 	 */
-	
 	public double[][] getLayer() {
-		
-
-		
 		double[][] layer = new double[neurons.length][];
-
 		
-		
-		for (int i = 0; i < neurons.length; i++) {
-			
+		for (int i = 0; i < neurons.length; i++) {	
 			layer[i] = neurons[i].getWeights();
-		
 		}
 		
 		return layer;
-	
 	}
-	
 
-	
-	public Neuron[] getNeurons() {
-		
+	public Neuron[] getNeurons() {		
 		return neurons;
-	
 	}
-
 }

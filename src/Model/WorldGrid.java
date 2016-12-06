@@ -31,8 +31,7 @@ public class WorldGrid implements Serializable {
 		for (int y = 0; y < yTileCount; y++)
 			for (int x = 0; x < xTileCount; x++) {
 				tiles[x][y] = new Tile(150, 150, 150);
-			}
-		
+			}	
 		
 		for (int i = 0; i < c; i++) {
 			int x;
@@ -47,10 +46,7 @@ public class WorldGrid implements Serializable {
 			int tX = (int)(x/tileSize);
 			int tY = (int)(y/tileSize);
 			tiles[tX][tY].addCreature(creatures[x][y]);
-		}
-		
-		
-		
+		}	
 	}
 	
 	public WorldGrid(double[][][] map, int tSize, ArrayList<Creature> c) {
@@ -73,16 +69,13 @@ public class WorldGrid implements Serializable {
 				tiles[x][y] = new Tile(r, g, b);
 			}
 		
-		
-		
 		for (Creature cr : c) {
 			int x = cr.getX();
 			int y = cr.getY();
 			
 			creatures[x][y] = cr;
 			tiles[(int)(x/10)][(int)(y/10)].addCreature(cr);
-		}
-		
+		}	
 	}
 	
 	public WorldGrid(double[][][] map, int tSize, int c) {
@@ -94,9 +87,6 @@ public class WorldGrid implements Serializable {
 		cCount = c;
 		tileSize = tSize;
 		cList = new ArrayList<Creature>();
-		
-		
-		
 		
 		tiles = new Tile[xTiles][yTiles];
 		
@@ -124,16 +114,14 @@ public class WorldGrid implements Serializable {
 			int tY = (int)(y/tileSize);
 			tiles[tX][tY].addCreature(creatures[x][y]);
 		}
-		
 	}
 
 	public int consume(int xPos, int yPos, int r, int g, int b) {
-		// TODO Auto-generated method stub
+		
 		int x = (int)(xPos/tileSize);
 		int y = (int)(yPos/tileSize);
 		
-		return tiles[x][y].consume(r, g, b);
-		
+		return tiles[x][y].consume(r, g, b);	
 	}
 
 	public void killCreature(int xPos, int yPos) {
@@ -144,9 +132,7 @@ public class WorldGrid implements Serializable {
 		int yTile = (int)(yPos/tileSize);
 		
 		tiles[xTile][yTile].removeCreature(c);
-		cList.remove(c);
-		//System.out.println("Killed.");
-		
+		cList.remove(c);		
 	}
 
 	public int[] move(int xOld, int yOld, int xPos, int yPos) {
@@ -176,7 +162,6 @@ public class WorldGrid implements Serializable {
 			boolean xChg = xOldTile != xNewTile;
 			boolean yChg = yOldTile != yNewTile;
 			if (xChg || yChg) {
-				//System.out.println("test");
 				
 				tiles[xOldTile][yOldTile].removeCreature(c);
 				tiles[xNewTile][yNewTile].addCreature(c);
@@ -192,8 +177,6 @@ public class WorldGrid implements Serializable {
 		temp[0] = xOld;
 		temp[1] = yOld;
 		return temp;
-		
-		
 	}
 	
 	public int[] look(int x, int y) {
@@ -205,28 +188,18 @@ public class WorldGrid implements Serializable {
 		if (x < 0 || x >= xTiles || y < 0 || y >= yTiles)
 			return out;
 		
-		
-		
 		return tiles[xTile][yTile].look(x, y);
-		
-		
-		
 	}
 
 	public int attack(int x, int y, int size) {
 		int xTile = (int)(x/tileSize);
 		int yTile = (int)(y/tileSize);
+		
 		return tiles[xTile][yTile].attack(x, y, size);
-		
-		
 	}
 	
 	public static ArrayList<Creature> getCreatures() {
-		
-		
 		return cList;
-		
-		
 	}
 	
 	public Creature[][] getArrayCreatures() {
@@ -253,9 +226,6 @@ public class WorldGrid implements Serializable {
 			int x = (r.nextInt() % 2) == 0 ? 1 : -1;
 			int y = (r.nextInt() % 2) == 0 ? 1 : -1;
 			
-			//System.out.println("" + kid.getX() + " " + kid.getY());
-			//System.out.println(creatures[kid.getX()][kid.getY()]);
-			
 			if (kid.getX()+x < xTiles*tileSize && kid.getX()+y >= 0)
 				kid.mvX(x);
 			if (kid.getY()+y < xTiles*tileSize && kid.getY()+y >= 0)
@@ -278,8 +248,6 @@ public class WorldGrid implements Serializable {
 		int yTile = (int)(kid.getY()/tileSize);
 		
 		tiles[xTile][yTile].addCreature(kid);
-			
-		
 	}
 	
 	public void advance() {
@@ -289,7 +257,6 @@ public class WorldGrid implements Serializable {
 			int y = r.nextInt(yTiles*tileSize);
 			Creature kid = new Creature(x, y, 100, this);
 			createCreature(kid);
-			//System.out.println(cCount);
 		}
 		
 		
@@ -303,17 +270,14 @@ public class WorldGrid implements Serializable {
 	}
 
 	public int getXTiles() {
-		// TODO Auto-generated method stub
 		return xTiles;
 	}
 
 	public int getYTiles() {
-		// TODO Auto-generated method stub
 		return yTiles;
 	}
 	
 	public int getTileSize() {
-		
 		return tileSize;
 	}
 

@@ -29,66 +29,52 @@ public class Tile implements Serializable {
 	}
 	
 	public int getR() {
-		//update();
 		return r;
 	}
 
 	public void setR(int r) {
-		//update();
 		this.r = r;
 	}
 
 	public int getG() {
-		//update();
 		return g;
 	}
 
 	public void setG(int g) {
-		//update();
 		this.g = g;
 	}
 
 	public int getB() {
-		//update();
 		return b;
 	}
 
 	public void setB(int b) {
-		//update();
 		this.b = b;
 	}
 
 	public int getMaxR() {
-		//update();
 		return maxR;
 	}
 
 	public void setMaxR(int maxR) {
-		//update();
 		this.maxR = maxR;
 	}
 
 	public int getMaxG() {
-		//update();
 		return maxG;
 	}
 
 	public void setMaxG(int maxG) {
-		//update();
 		this.maxG = maxG;
 	}
 
 	public int getMaxB() {
-		//update();
 		return maxB;
 	}
 
 	public void setMaxB(int maxB) {
-		//update();
 		this.maxB = maxB;
 	}
-	
-	
 	
 	public void update() {
 		int diff = iter - lastIter;
@@ -108,8 +94,6 @@ public class Tile implements Serializable {
 	
 
 	public int consume(int r2, int g2, int b2) {
-		// TODO Auto-generated method stub
-		//update();
 		double val = .1;
 		int out;
 		if (r2 == Math.max(r2, Math.max(g2, b2))) {
@@ -180,7 +164,6 @@ public class Tile implements Serializable {
 		
 		int out = closest.damage(size);
 		
-		// TODO Auto-generated method stub
 		return out;
 	}
 }

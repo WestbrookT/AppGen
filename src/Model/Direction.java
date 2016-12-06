@@ -10,13 +10,9 @@ public class Direction {
 		if (Math.abs(direct) < .3)
 			return out;
 		
-	
-		
 		if (direct < 0) {
 			angle = 1.0 - angle;
 		}
-		
-		
 		
 		if (angle < .0625) {
 			out[0] = 1;
@@ -40,11 +36,8 @@ public class Direction {
 			out[1] = 1;
 		} else {
 			out[0] = 1;
-		}
-		
-		
+		}		
 		
 		return out;
 	}
-
 }

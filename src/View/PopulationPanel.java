@@ -5,6 +5,7 @@ import java.util.*;
 import javax.swing.*;
 
 import Model.Creature;
+import Model.Model;
 import Model.WorldGrid;
 
 public class PopulationPanel extends JPanel {
@@ -20,14 +21,12 @@ public class PopulationPanel extends JPanel {
     private static ArrayList<Integer> pop;
     private WorldGrid grid;
 
-    public PopulationPanel(WorldGrid wg) {
-    	currentPop = grid.getCreatures();
+    public PopulationPanel(Model model) {
+    	currentPop = model.getWorldGrid().getCreatures();
     	pop = new ArrayList <Integer> ();
         pop.add(currentPop.size());
         
     }
-
-
 
     @Override
     protected void paintComponent(Graphics g) {
@@ -122,6 +121,5 @@ public class PopulationPanel extends JPanel {
             maxPop = Math.max(maxPop, population);
         }
         return maxPop;
-    }
-    
+    } 
 }

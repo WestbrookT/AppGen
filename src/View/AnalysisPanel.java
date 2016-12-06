@@ -14,10 +14,12 @@ public class AnalysisPanel extends JPanel {
 	private double[][][] network;
 	private ArrayList<Creature> currentPop;
 	private Creature nearestCreature;
+	private Model model;
 
-	public AnalysisPanel(WorldGrid grid) {
-		currentPop = grid.getCreatures();
-		this.nearestCreature = CreatureSelection.nearestCreature();
+	public AnalysisPanel(Model model) {
+		this.model = model;
+		currentPop = model.getWorldGrid().getCreatures();
+		this.nearestCreature = model.getNearestCreature();
 		
 		if(nearestCreature == null){
 			network = currentPop.get(0).weights();
@@ -33,7 +35,7 @@ public class AnalysisPanel extends JPanel {
         Graphics2D g2 = (Graphics2D) g;
         g2.setColor(Color.WHITE);
         g2.fillRect(0, 0, getWidth(), getHeight());
-        nearestCreature = CreatureSelection.nearestCreature();
+        nearestCreature = model.getNearestCreature();
         if(nearestCreature != null){
         	network = nearestCreature.weights();
         }

@@ -55,7 +55,6 @@ public class Creature implements Serializable {
 	private void check() {
 		if (size <= 0) {
 			world.killCreature(xPos, yPos);
-			//System.out.println(size);
 		}
 	}
 	
@@ -64,7 +63,6 @@ public class Creature implements Serializable {
 		int cost = 1;
 		size -= cost;
 		if (val > .3) {
-			
 			size += world.consume(xPos, yPos, r, g, b);
 		}
 	}
@@ -74,17 +72,12 @@ public class Creature implements Serializable {
 		int cost =  (int)(size*.06)+1;
 		size -= cost;
 		if (val > .5) {
-
 			size += world.attack(xPos, yPos, size);
-
-		}
-		
+		}	
 	}
 	
 	private Creature child(int startSize) {
-		
 		double[][][] net = brain.getNetwork();
-		
 		Random r = new Random();
 		
 		for (int layer = 0; layer < net.length; layer ++) {
@@ -93,8 +86,7 @@ public class Creature implements Serializable {
 					if (r.nextDouble() > 1.0 - mutationRate) {
 						int dir = (r.nextInt() % 2 == 0) ? 1 : -1;
 						net[layer][neuron][weight] += dir*net[layer][neuron][weight]*mutationSize;
-					}
-						
+					}	
 				}
 			}
 		}
@@ -105,7 +97,6 @@ public class Creature implements Serializable {
 	private void reproduce(double val) {
 		check();
 		if (val > .7) {
-			//System.out.println("Kid made.");
 			if (size < 30)
 				return;
 			int cost = (int)(size*.6);
@@ -117,16 +108,8 @@ public class Creature implements Serializable {
 		}
 	}
 	
-	
-	
 	private void move(double mv, double direct) {
 		check();
-
-//		if (x < 0 || y < 0) {
-//			System.out.println("x: " + x + ", y: " + y);
-//		}
-		
-		
 		
 		int xOld = xPos;
 		int yOld = yPos;
@@ -223,26 +206,16 @@ public class Creature implements Serializable {
 		//Change the color of the creature to match its decisions.
 		
 		r = (int)(255*((1+decisions[5])/2));
-		
-			
 		g = (int)(255*((1+decisions[6])/2));
 		b = (int)(255*((1+decisions[7])/2));
-		//System.out.println("Why? "+ r + " " + g + " " + b);
 		
 		// Update the memory variable
 		memory = decisions[8];
-		
-		
-		
-		
-		
 	}
 	
 	public double[][][] weights() {
 		return brain.getNetwork();
 	}
-	
-	
 	
 	public int getX() {
 		return xPos;
@@ -266,31 +239,18 @@ public class Creature implements Serializable {
 	}
 
 	public int getR() {
-		// TODO Auto-generated method stub
-		//System.out.println(r);
 		return r;
 	}
 
 	public int getG() {
-		// TODO Auto-generated method stub
 		return g;
 	}
 
 	public int getB() {
-		// TODO Auto-generated method stub
 		return b;
 	}
 
 	public int getSize() {
 		return size;
-	}
-	
-	
+	}	
 }
-
-
-
-
-
-
-

@@ -11,8 +11,6 @@ import java.util.ArrayList;
 
 public class Model implements Serializable {
 	
-	//private Creature creatures = new Creature();
-	
 	private static WorldGrid world;
 	private int speed = 1;
 	private boolean paused = false;
@@ -26,7 +24,7 @@ public class Model implements Serializable {
 	private int height;
 	private int ms;
 	private int layers;
-	private int smooth;
+	private static Creature nearestCreature;
 	
 	
 	public Model(int xTileCount, int yTileCount, int tSize, int c) {
@@ -39,15 +37,10 @@ public class Model implements Serializable {
 	
 	public void reset() {
 		
-		
-		
 		PerlinArray pa = new PerlinArray(width, height, ms, layers, ms);
 		double[][][] map = pa.build();
 		pa.thresh(4, .3);
-		
-		
-
-		
+			
 		world = new WorldGrid(map, tS, c);
 	}
 	
@@ -63,7 +56,6 @@ public class Model implements Serializable {
 		tS = tileSize;
 		this.c = c;
 
-		
 		world = new WorldGrid(map, tileSize, c);
 	}
 
@@ -108,9 +100,9 @@ public class Model implements Serializable {
 		
 	}
 	
-	public static Creature getNearestCreature(int x, int y) {
+	public void setNearestCreature(int x, int y) {
 		ArrayList<Creature> creatures = world.getCreatures();
-		Creature nearestCreature = creatures.get(0);
+		nearestCreature = creatures.get(0);
 		try {
 			for(Creature creature : creatures){
 				if((Math.abs(creature.getX()-x) + Math.abs(creature.getY()-y)) < (Math.abs(nearestCreature.getX()-x)+Math.abs(nearestCreature.getY()-y))){
@@ -118,6 +110,10 @@ public class Model implements Serializable {
 				}
 			}
 		} catch(Exception e){}
+	}
+	
+	public static Creature getNearestCreature() {
+		
 		return nearestCreature;
 	}
 	
@@ -145,77 +141,9 @@ public class Model implements Serializable {
 		}
 		Model.world = null;
 		Model.world = loaded;
-
-
-
 	}
+	
 	public void setWorld(WorldGrid w) {
 		world = w;
 	}
-	
-	public static void main(String[] args) {
-		
-		
-		world = new WorldGrid(10, 20, 2, 10);
-
-
-		Creature[][] c = world.getArrayCreatures();
-
-
-		for (int i = 0; i < 10; i++) {
-
-			for (int j = 0; j < 10; j++)
-				if (c[i][j] != null)
-					System.out.print(" X");
-				else
-					System.out.print(" .");
-			System.out.println();
-		}
-
-
-		int ts = world.getTileSize();
-		int xs = world.getXTiles();
-		int ys = world.getYTiles();
-
-		for (int x = 0; x < 1000000; x++) {
-			world.advance();
-			if (x% 1000 == 0)
-				System.out.println(x);
-		}
-
-		for (int x = 0; x < 1000; x++) {
-			world.advance();
-
-
-			System.out.println("\n\n\n\n\n\n\n\n");
-			for (int i = 0; i < xs*ts; i++) {
-
-				for (int j = 0; j < ys*ts; j++)
-					if (c[i][j] != null)
-						System.out.print(" " + (int)(c[i][j].getR()/255.0*10));
-					else
-						System.out.print(" .");
-				System.out.println();
-			}
-			System.out.println(x);
-			for (int i = 0; i < 100000; i=i)
-				for (int j = 0; j < 20000; j++)
-					for (int k = 0; k < 1; k++)
-					{
-						int b = i + j;
-					}
-	
-			
-		}
-	}
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }

@@ -22,11 +22,7 @@ public class CreatureSelection extends MouseAdapter {
 	public void mousePressed(MouseEvent e) {
 		this.xPos = e.getX();
 		this.yPos = e.getY();
+		model.setNearestCreature(xPos, yPos);
 		ap.repaint();
-		
-	}
-	public static Creature nearestCreature(){
-		nearestCreature = model.getNearestCreature(xPos, yPos);
-		return nearestCreature;	
 	}
 }
